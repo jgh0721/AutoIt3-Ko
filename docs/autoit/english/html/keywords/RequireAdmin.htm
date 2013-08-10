@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Keyword #RequireAdmin</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Keyword Reference</h1>
+<hr style="height:0px">
+<h1>#RequireAdmin</h1>
+<p class="funcdesc">Specifies that the current script requires full administrator rights to run.<br></p>
+
+<p class="codeheader">
+<b>#RequireAdmin</b><br>
+</p>
+
+<h2>Parameters</h2>
+None.<br>
+
+
+<h2>Remarks</h2>
+This function was primarily aimed at allowing AutoIt scripts to work correctly with Windows User Account Control (UAC).<br>
+<br>
+For more details see <a href="../intro/autoit_on_vista.htm">AutoIt on Windows Vista</a>.<br>
+<br>
+As this function launch a new process, some functions as ConsoleWrite() cannot be captured (SciTE will not display anything).<br>
+In case system doesn't have elevation mechanism (e.g. disabled UAC) new process will run under the same user as the original.<br>
+<br>
+
+<h2>Related</h2>
+<a href="../functions/IsAdmin.htm">IsAdmin</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\RequireAdmin.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S11">#RequireAdmin</span>
+
+<span class="S5">If</span><span class="S0"> </span><span class="S4">IsAdmin</span><span class="S8">()</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The script is running with admin rights."</span><span class="S8">)</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

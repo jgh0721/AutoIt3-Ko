@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function MouseGetCursor</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>MouseGetCursor</h1>
+<p class="funcdesc">Returns the cursor ID Number for the current Mouse Cursor.<br></p>
+
+<p class="codeheader">
+MouseGetCursor (  )<br>
+</p>
+
+<h2>Parameters</h2>
+None.<br>
+
+
+<h2>Return Value</h2>
+Returns a cursor ID Number:<br>
+&nbsp;&nbsp;&nbsp; 0 = UNKNOWN  (this includes pointing and grabbing hand icons)<br>
+&nbsp;&nbsp;&nbsp; 1 = APPSTARTING<br>
+&nbsp;&nbsp;&nbsp; 2 = ARROW<br>
+&nbsp;&nbsp;&nbsp; 3 = CROSS<br>
+&nbsp;&nbsp;&nbsp; 4 = HELP<br>
+&nbsp;&nbsp;&nbsp; 5 = IBEAM<br>
+&nbsp;&nbsp;&nbsp; 6 = ICON<br>
+&nbsp;&nbsp;&nbsp; 7 = NO<br>
+&nbsp;&nbsp;&nbsp; 8 = SIZE<br>
+&nbsp;&nbsp;&nbsp; 9 = SIZEALL<br>
+&nbsp;&nbsp;&nbsp; 10 = SIZENESW<br>
+&nbsp;&nbsp;&nbsp; 11 = SIZENS<br>
+&nbsp;&nbsp;&nbsp; 12 = SIZENWSE<br>
+&nbsp;&nbsp;&nbsp; 13 = SIZEWE<br>
+&nbsp;&nbsp;&nbsp; 14 = UPARROW<br>
+&nbsp;&nbsp;&nbsp; 15 = WAIT<br>
+&nbsp;&nbsp;&nbsp; 16 = HAND<br>
+
+<h2>Remarks</h2>
+None.<br>
+<br>
+
+<h2>Related</h2>
+<a href="MouseGetPos.htm">MouseGetPos</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\MouseGetCursor.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S4">Sleep</span><span class="S8">(</span><span class="S3">1000</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Allow time for the cursor to change its state.</span>
+
+<span class="S1">; Create an array of possible cursor states using StringSplit.</span>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringSplit</span><span class="S8">(</span><span class="S7">"Unknown|AppStarting|Arrow|Cross|Help|IBeam|Icon|No|"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Size|SizeAll|SizeNESW|SizeNS|SizeNWSE|SizeWE|UpArrow|Wait|Hand"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"|"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; The flag parameter is set to flag = 2 as we don't require the total count of the array.</span>
+<span class="S2">#cs</span>
+<span class="S2">&nbsp; &nbsp; The array returned will contain the following values:</span>
+<span class="S2">&nbsp; &nbsp; $aArray[0] = "Unknown"</span>
+<span class="S2">&nbsp; &nbsp; $aArray[1] = "AppStarting"</span>
+<span class="S2">&nbsp; &nbsp; $aArray[2] = "Arrow"</span>
+<span class="S2">&nbsp; &nbsp; ...</span>
+<span class="S2">&nbsp; &nbsp; $aArray[16] = "Hand"</span>
+<span class="S2">#ce</span>
+
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$iCursor</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">MouseGetCursor</span><span class="S8">()</span>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"CursorID = "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$iCursor</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Which means "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S9">$iCursor</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"."</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Use the CursorID value as the index value of the array</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function RegEnumVal</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>RegEnumVal</h1>
+<p class="funcdesc">Reads the name of a value according to its instance.<br></p>
+
+<p class="codeheader">
+RegEnumVal ( "keyname", instance )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">keyname</td>
+    <td style="width:85%">The registry key to read.</td>
+  </tr>
+  <tr>
+   <td>instance</td>
+   <td>The 1-based value instance to retrieve</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns the requested registry value. @extended is set to the type of the value.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns an empty string and sets @error to:<br>
+       1 if unable to open requested key<br>
+       2 if unable to open requested main key<br>
+       3 if unable to remote connect to the registry<br>
+       -1 if unable to retrieve requested value name (value instance out of range)</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+A registry key must start with "HKEY_LOCAL_MACHINE" ("HKLM") or "HKEY_USERS" ("HKU") or "HKEY_CURRENT_USER" ("HKCU") or "HKEY_CLASSES_ROOT" ("HKCR") or "HKEY_CURRENT_CONFIG" ("HKCC").<br>
+<br>
+When running on 64-bit Windows if you want to enum a value specific to the 64-bit environment you have to suffix the HK... with 64 i.e. HKLM64.<br>
+<br>
+
+<h2>Related</h2>
+<a href="RegEnumKey.htm">RegEnumKey</a>, <a href="RegDelete.htm">RegDelete</a>, <a href="RegWrite.htm">RegWrite</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\RegEnumVal.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sVar</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span>
+
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S3">100</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sVar</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">RegEnumVal</span><span class="S8">(</span><span class="S7">"HKEY_LOCAL_MACHINE\SOFTWARE\AutoIt v3\AutoIt"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Value Name &nbsp;#"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" under in AutoIt3 key"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sVar</span><span class="S8">)</span>
+<span class="S5">Next</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

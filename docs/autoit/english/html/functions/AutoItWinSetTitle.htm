@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function AutoItWinSetTitle</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>AutoItWinSetTitle</h1>
+<p class="funcdesc">Changes the title of the AutoIt window.<br></p>
+
+<p class="codeheader">
+AutoItWinSetTitle ( "newtitle" )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">newtitle</td>
+    <td style="width:85%">The new title to give to the window.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+None.<br>
+
+<h2>Remarks</h2>
+The AutoIt window is usually hidden.  The purpose of changing the title is to allow other programs (or other AutoIt scripts) to interact with AutoIt.<br>
+<br>
+
+<h2>Related</h2>
+<a href="AutoItWinGetTitle.htm">AutoItWinGetTitle</a>, <a href="WinSetTitle.htm">WinSetTitle</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<h3>Example 1</h3>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\AutoItWinSetTitle.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S1">; Check if the script is already running</span>
+<span class="S1">; Note: The recommended approach is to use _Singleton from Misc.au3</span>
+
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sMyAutoItTitle</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"ThisIsSomeUniqueStringThatOtherWindowsWontHave"</span>
+
+<span class="S5">If</span><span class="S0"> </span><span class="S4">WinExists</span><span class="S8">(</span><span class="S9">$sMyAutoItTitle</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; The script is already running</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S5">Default</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The script is already running."</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"It's PID is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">WinGetProcess</span><span class="S8">(</span><span class="S9">$sMyAutoItTitle</span><span class="S8">))</span>
+<span class="S5">Else</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; This is the first instance of the script.</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Set the autoit window title</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">AutoItWinSetTitle</span><span class="S8">(</span><span class="S9">$sMyAutoItTitle</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Run this script again.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@Compiled</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Run</span><span class="S8">(</span><span class="S7">'"'</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@ScriptFullPath</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">'"'</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Run</span><span class="S8">(</span><span class="S7">'"'</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@AutoItExe</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">'" "'</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@ScriptFullPath</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">'"'</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S5">Default</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"This is the first instance."</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"My PID is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@AutoItPID</span><span class="S8">)</span>
+<span class="S5">EndIf</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+<h3>Example 2</h3>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\AutoItWinSetTitle[2].au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext1\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext1" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Set the title of of the AutoIt Hidden Window.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">AutoItWinSetTitle</span><span class="S8">(</span><span class="S7">"My AutoIt Window"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display AutoIt's Hidden Window.</span>
+<span class="S0">&nbsp; &nbsp; AutoItWinShow</span><span class="S8">()</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+
+<span class="S1">; Display AutoIt"s Hidden Window. Returns the handle of the window.</span>
+<span class="S5">Func</span><span class="S0"> AutoItWinShow</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hWnd</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetHandle</span><span class="S8">(</span><span class="S4">AutoItWinGetTitle</span><span class="S8">())</span><span class="S0"> </span><span class="S1">; Get the handle of the AutoIt Hidden Window by finding out the title of the AutoIt Hidden Window.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S8">(</span><span class="S6">@DesktopWidth</span><span class="S0"> </span><span class="S8">/</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">250</span><span class="S8">,</span><span class="S0"> </span><span class="S8">(</span><span class="S6">@DesktopHeight</span><span class="S0"> </span><span class="S8">/</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">250</span><span class="S8">,</span><span class="S0"> </span><span class="S3">500</span><span class="S8">,</span><span class="S0"> </span><span class="S3">500</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Move the AutoIt Hidden Window and re-size for a better view.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinSetState</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_SHOW</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Show the AutoIt Hidden Window, normally this is hidden, but in the interest of this example I"m displaying it.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$hWnd</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;AutoItWinShow</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

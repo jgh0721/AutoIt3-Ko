@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function Int</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>Int</h1>
+<p class="funcdesc">Returns the integer (whole number) representation of an expression.<br></p>
+
+<p class="codeheader">
+Int ( expression [, flag = 0] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">expression</td>
+    <td style="width:85%">An expression to convert into an integer.</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>	<b>[optional]</b> Defines behavior.<br>
+       Can be one of the following:<br>
+       Default = the result is auto-sized integer. See remarks.<br>
+       1 = the result is 32bit integer.<br>
+       2 = the result is 64bit integer.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns an integer.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+Default behavior is that if the result is within range of 32bit integer then 32bit integer is returned. If not, 64bit integer is returned. Both signed.<br>
+Fractional portions are truncated, so Int(1.999999) returns 1<br>
+Int(0/0) returns -9223372036854775807, if you were wondering.<br>
+This function makes minor corrects to floating point numbers to account for the imprecise nature of floating point numbers.  For example, the floating point expression 0.7 + 0.2 + 0.1 produces a floating point number that is not quite 1.0.  Int() corrects for this anomaly, however, certain extremely rare circumstances may lead to Int() returning an unexpected value (the odds of getting an unexpected value are less than if Int() did not attempt any correction at all).<br>
+<br>
+
+<h2>Related</h2>
+<a href="Number.htm">Number</a>, <a href="String.htm">String</a>, <a href="Round.htm">Round</a>, <a href="HWnd.htm">HWnd</a>, <a href="Binary.htm">Binary</a>, <a href="Ceiling.htm">Ceiling</a>, <a href="Floor.htm">Floor</a>, <a href="Ptr.htm">Ptr</a>, <a href="Mod.htm">Mod</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\Int.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S1">; Assign a Local variable the int representation of 10.793.</span>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$iInt</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Int</span><span class="S8">(</span><span class="S3">10.793</span><span class="S8">)</span>
+
+<span class="S1">; Display the result.</span>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iInt</span><span class="S8">)</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function ObjName</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>ObjName</h1>
+<p class="funcdesc">Returns the name or interface description of an Object<br></p>
+
+<p class="codeheader">
+ObjName ( $Objectvariable [, Flag = 1] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">$Objectvariable</td>
+    <td style="width:85%">A variable containing an Object whose name you want to retrieve</td>
+  </tr>
+  <tr>
+   <td>Flag</td>
+   <td>	<b>[optional]</b> 1 = (default) The name of the Object<br>
+       2 = Description string of the Object<br>
+       3 = The ProgID of the Object<br>
+       4 = The file that is associated with the object in the Registry<br>
+       5 = Module name in which the object runs (WIN XP And above). Marshaller for non-inproc objects.<br>
+       6 = CLSID of the object's coclass<br>
+       7 = IID of the object's interface</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns a string representing the name</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Sets @error and Returns ""</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+Not all Objects support flags 2 to 7. Always test for @error in these cases.<br>
+<br>
+
+<h2>Related</h2>
+<a href="IsObj.htm">IsObj</a>, <a href="ObjGet.htm">ObjGet</a>, <a href="ObjCreate.htm">ObjCreate</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\ObjName.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$oInternet</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"InternetExplorer.Application"</span><span class="S8">)</span>
+<span class="S9">$oInternet</span><span class="S8">.</span><span class="S14">Navigate</span><span class="S8">(</span><span class="S7">"http://www.google.com"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Opening a web page that contains a form</span>
+<span class="S4">Sleep</span><span class="S8">(</span><span class="S3">4000</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Give the page time to load</span>
+
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$oDoc</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$oInternet</span><span class="S8">.</span><span class="S14">document</span><span class="S0"> </span><span class="S1">; Example object to test</span>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$oForm</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$oDoc</span><span class="S8">.</span><span class="S14">forms</span><span class="S8">(</span><span class="S3">0</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Example object to test</span>
+
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Interface name of $oInternet is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oInternet</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Object name of $oInternet is: &nbsp;&nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oInternet</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Interface name of $oDoc is: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oDoc</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Object name of $oDoc is: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oDoc</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Interface name of $oForm is: &nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oForm</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Object name of $oForm is: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">ObjName</span><span class="S8">(</span><span class="S9">$oForm</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">))</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

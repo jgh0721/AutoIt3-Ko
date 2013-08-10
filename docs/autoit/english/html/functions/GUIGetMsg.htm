@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function GUIGetMsg</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>GUIGetMsg</h1>
+<p class="funcdesc">Polls the GUI to see if any events have occurred.<br></p>
+
+<p class="codeheader">
+GUIGetMsg ( [ advanced = 0 ] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">advanced</td>
+    <td style="width:85%">	<b>[optional]</b> return extended information in an array.<br>
+       0 = (default) Returns a single event.<br>
+       1 = returns an array containing the event and extended information.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+Returns an event, or an array depending on the "advanced" parameter.<br>
+The "event" returned is the control ID of the control sending the message, or it is a special event (like the window is closing, minimizing).  Or if there is no message, the event is 0.<br>
+<br><br>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top"><b>Event ID</b>:</td>
+    <td style="width:90%"><b>the ID of the control sending the message</b></td>
+  </tr>
+  <tr>
+    <td valign="top">0:</td>
+    <td>No event</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_CLOSE:</td>
+    <td>dialog box being closed (either by defined button or system menu).</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_MINIMIZE:</td>
+    <td>dialog box minimized with Windows title bar button.</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_RESTORE:</td>
+    <td>dialog box restored by click on task bar icon.</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_MAXIMIZE:</td>
+    <td>dialog box maximized with Windows title bar button.</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_MOUSEMOVE:</td>
+    <td>the mouse cursor has moved.</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_PRIMARYDOWN:</td>
+    <td>the primary mouse button was pressed.</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_PRIMARYUP:</td>
+    <td>the primary mouse button was released.</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_SECONDARYDOWN:</td>
+    <td>the secondary mouse button was pressed.</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_SECONDARYUP:</td>
+    <td>the secondary mouse button was released.</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_RESIZED:</td>
+    <td>dialog box has been resized.</td>
+  </tr>
+  <tr>
+    <td valign="top">$GUI_EVENT_DROPPED:</td>
+    <td>End of a Drag&Drop action @GUI_DragId, @GUI_DragFile and @GUI_DropId will be used to retrieve the ID's/file corresponding to the involve control.</td>
+  </tr>
+</table><br><br>
+When using the "advanced" parameter the information is returned in an array with extended information:<br>
+$aArray[0] = 0 or Event ID or Control ID<br>
+$aArray[1] = The window handle the event is from<br>
+$aArray[2] = The control handle the event is from (if applicable)<br>
+$aArray[3] = The current X position of the mouse cursor (relative to the GUI window)<br>
+$aArray[4] = The current Y position of the mouse cursor (relative to the GUI window)<br>
+<br><br>
+If the GUIOnEventMode option is set to 1 then the return from GUIGetMsg is always 0 and the @error is set to 1.<br>
+If the option GUIEventOptions is set to 1 the minimize, restore and maximize button will not do any action on the window just a simple notification.<br>
+
+<h2>Remarks</h2>
+This function automatically idles the CPU when required so that it can be safely used in tight loops without hogging all the CPU.<br>
+<br>
+Information about the mouse position and the hovering control can be retrieved with GUIGetCursorInfo. No event is fired when the mouse is over a control so GUIGetCursorInfo must be called to retrieve the ControlID.<br>
+<br>
+
+<h2>Related</h2>
+<a href="GUICreate.htm">GUICreate</a>, <a href="GUICtrlCreate Management.htm">GUICtrlCreate...</a>, <a href="GUICtrlRead.htm">GUICtrlRead</a>, <a href="AutoItSetOption.htm#GUIOnEventMode">GUIOnEventMode (Option)</a>, <a href="AutoItSetOption.htm#GUIEventOptions">GUIEventOptions (Option)</a>, <a href="GUIGetCursorInfo.htm">GUIGetCursorInfo</a>, <a href="GUICtrlSendMsg.htm">GUICtrlSendMsg</a>, <a href="GUICtrlSetOnEvent.htm">GUICtrlSetOnEvent</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\GUIGetMsg.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S1">; -------------------------------------------------------------------------------------</span>
+<span class="S1">; Example - Press the button to see the value of the radio boxes</span>
+<span class="S1">; The script also detects state changes (closed/minimized/timeouts, etc).</span>
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iButton_1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iRadio_1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iRadio_3</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUICoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Radio Box Demo"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S8">,</span><span class="S0"> </span><span class="S3">280</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Create the controls</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$iButton_1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"B&amp;utton 1"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">30</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">120</span><span class="S8">,</span><span class="S0"> </span><span class="S3">40</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateGroup</span><span class="S8">(</span><span class="S7">"Group 1"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">30</span><span class="S8">,</span><span class="S0"> </span><span class="S3">90</span><span class="S8">,</span><span class="S0"> </span><span class="S3">165</span><span class="S8">,</span><span class="S0"> </span><span class="S3">160</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIStartGroup</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$iRadio_1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateRadio</span><span class="S8">(</span><span class="S7">"Radio &amp;0"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">120</span><span class="S8">,</span><span class="S0"> </span><span class="S3">70</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateRadio</span><span class="S8">(</span><span class="S7">"Radio &amp;1"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">150</span><span class="S8">,</span><span class="S0"> </span><span class="S3">60</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$iRadio_3</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateRadio</span><span class="S8">(</span><span class="S7">"Radio &amp;2"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">180</span><span class="S8">,</span><span class="S0"> </span><span class="S3">60</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Init our vars that we will use to keep track of GUI events</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iRadioVal1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S1">; We will assume 0 = first radio button selected, 2 = last button</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Show the GUI</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; In this message loop we use variables to keep track of changes to the radios, another</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; way would be to use GUICtrlRead() at the end to read in the state of each control</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$iMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Select</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$iMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Dialog was closed"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$iMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_MINIMIZE</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Dialog minimized"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$iMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_MAXIMIZE</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Dialog restored"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$iMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$iButton_1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Default button clicked:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"Radio "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$iRadioVal1</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$iMsg</span><span class="S0"> </span><span class="S8">&gt;=</span><span class="S0"> </span><span class="S9">$iRadio_1</span><span class="S0"> </span><span class="S5">And</span><span class="S0"> </span><span class="S9">$iMsg</span><span class="S0"> </span><span class="S8">&lt;=</span><span class="S0"> </span><span class="S9">$iRadio_3</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$iRadioVal1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$iMsg</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S9">$iRadio_1</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSelect</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">()</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

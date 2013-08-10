@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function GUICtrlCreatePic</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>GUICtrlCreatePic</h1>
+<p class="funcdesc">Creates a Picture control for the GUI.<br></p>
+
+<p class="codeheader">
+GUICtrlCreatePic ( filename, left, top [, width [, height [, style = -1 [, exStyle = -1 ]]]] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">filename</td>
+    <td style="width:85%">filename of the picture to be loaded : supported types BMP, JPG, GIF(but not animated).</td>
+  </tr>
+  <tr>
+   <td>left</td>
+   <td>The left side of the control. If -1 is used then left will be computed according to <a href="AutoItSetOption.htm#GUICoordMode">GUICoordMode</a>.</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td>The top of the control. If -1 is used then top will be computed according to <a href="AutoItSetOption.htm#GUICoordMode">GUICoordMode</a>.</td>
+  </tr>
+  <tr>
+   <td>width</td>
+   <td>	<b>[optional]</b> The width of the control (default is the previously used width).</td>
+  </tr>
+  <tr>
+   <td>height</td>
+   <td>	<b>[optional]</b> The height of the control (default is the previously used height).</td>
+  </tr>
+  <tr>
+   <td>style</td>
+   <td>	<b>[optional]</b> Defines the style of the control. See <a href="../appendix/GUIStyles.htm#Label">GUI Control Styles Appendix</a>.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>default (-1) : $SS_NOTIFY<br>
+       forced style : $SS_BITMAP</td>
+  </tr>
+  <tr>
+   <td>exStyle</td>
+   <td>	<b>[optional]</b> Defines the extended style of the control. See <a href="../appendix/GUIStyles.htm#Extended">Extended Style Table</a>.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns the identifier (controlID) of the new control.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if picture cannot be created.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+To set or change information in the control see <a href="GUICtrlUpdate Management.htm">GUICtrlUpdate...</a>.<br>
+<br>
+To update the picture after the dialog box is displayed just use <a href="GUICtrlSetImage.htm">GUICtrlSetImage</a>.<br>
+<br>
+If you want to have a picture having the same size as the file content just use width=height=0.<br>
+<br>
+To have a transparent picture it is needed to create the GUI window with WS_EX_LAYERED extended style. The left-top pixel will be used as the transparency color. If several pictures are created the last picture is defining the transparent color. See example 2.<br>
+<br>
+To combine styles with the default style use <b>BitOR</b>($GUI_SS_DEFAULT_PIC, newstyle,...).<br>
+<br>
+To use the values specified above you must #include &lt;StaticConstants.au3&gt; in your script.<br>
+<br>
+Default resizing is $GUI_DOCKSIZE.<br>
+<br>
+If a picture is set as a background picture, as the other controls will overlap, it is important to disable the pic control: GUICtrlSetState(-1, $GUI_DISABLE).<br>
+<br>
+The extended style $GUI_WS_EX_PARENTDRAG can be used to allow the dragging of the parent window for windows that don't have a titlebar (no $WS_CAPTION style in GUICreate).<br>
+<br>
+The background is always set to transparent. GUICtrlSetBkColor() has not effect on pic control.<br>
+<br>
+PNG can be used with GDI+. See example 3.<br>
+<br>
+
+<h2>Related</h2>
+<a href="AutoItSetOption.htm#GUICoordMode">GUICoordMode (Option)</a>, <a href="GUICtrlSetImage.htm">GUICtrlSetImage</a>, <a href="GUICtrlUpdate Management.htm">GUICtrlUpdate...</a>, <a href="GUIGetMsg.htm">GUIGetMsg</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<h3>Example 1</h3>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\GUICtrlCreatePic.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WindowsConstants.au3&gt;</span>
+
+<span class="S0">Example1</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example1</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$msg</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI picture"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">350</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WS_SIZEBOX</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$WS_SYSMENU</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; will create a dialog box that when displayed is centered</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetBkColor</span><span class="S8">(</span><span class="S3">0xE0FFFF</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$n</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreatePic</span><span class="S8">(</span><span class="S7">"..\GUI\mslogo.jpg"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Run the GUI until the dialog is closed</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; resize the control</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$n</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlSetPos</span><span class="S8">(</span><span class="S9">$n</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Run the GUI until the dialog is closed</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">()</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example1</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+<h3>Example 2</h3>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\GUICtrlCreatePic[2].au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext1\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext1" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WindowsConstants.au3&gt;</span>
+
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$guiPos</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span>
+
+<span class="S0">Example2</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example2</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$msg</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$gui</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"test transparentpic"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$pic</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S3">68</span><span class="S8">,</span><span class="S0"> </span><span class="S3">71</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WS_POPUP</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$WS_EX_LAYERED</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WS_EX_MDICHILD</span><span class="S8">),</span><span class="S0"> </span><span class="S9">$gui</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreatePic</span><span class="S8">(</span><span class="S7">"..\GUI\merlin.gif"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$pic</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$gui</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{ESC}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"main"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{LEFT}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"left"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{RIGHT}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"right"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{DOWN}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"down"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{UP}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"up"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$picPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$guiPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Do</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Until</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{ESC}</span><span class="S7">"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{LEFT}</span><span class="S7">"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{RIGHT}</span><span class="S7">"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{DOWN}</span><span class="S7">"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{UP}</span><span class="S7">"</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example2</span>
+
+<span class="S5">Func</span><span class="S0"> main</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$guiPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$guiPos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$guiPos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;main</span>
+
+<span class="S5">Func</span><span class="S0"> left</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$picPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;left</span>
+
+<span class="S5">Func</span><span class="S0"> right</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$picPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;right</span>
+
+<span class="S5">Func</span><span class="S0"> down</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$picPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;down</span>
+
+<span class="S5">Func</span><span class="S0"> up</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$picPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;up</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+<h3>Example 3</h3>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\GUICtrlCreatePic[3].au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext2\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext2" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S1">; PNG work around by Zedna</span>
+
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WindowsConstants.au3&gt;</span>
+
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WindowsConstants.au3&gt;</span>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GDIPlus.au3&gt;</span>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WinAPI.au3&gt;</span>
+
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$hGUI</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hImage</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hGraphic</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hImage1</span>
+
+<span class="S1">; Create GUI</span>
+<span class="S9">$hGUI</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Show PNG"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">250</span><span class="S8">,</span><span class="S0"> </span><span class="S3">250</span><span class="S8">)</span>
+
+<span class="S1">; Load PNG image</span>
+<span class="S15">_GDIPlus_Startup</span><span class="S8">()</span>
+<span class="S9">$hImage</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S15">_GDIPlus_ImageLoadFromFile</span><span class="S8">(</span><span class="S7">"..\GUI\Torus.png"</span><span class="S8">)</span>
+<span class="S9">$hGraphic</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S15">_GDIPlus_GraphicsCreateFromHWND</span><span class="S8">(</span><span class="S9">$hGUI</span><span class="S8">)</span>
+
+<span class="S4">GUIRegisterMsg</span><span class="S8">(</span><span class="S9">$WM_PAINT</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MY_WM_PAINT"</span><span class="S8">)</span>
+<span class="S4">GUISetState</span><span class="S8">()</span>
+
+<span class="S1">; Loop until user exits</span>
+<span class="S5">Do</span>
+<span class="S5">Until</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span>
+
+<span class="S1">; Clean up resources</span>
+<span class="S15">_GDIPlus_GraphicsDispose</span><span class="S8">(</span><span class="S9">$hGraphic</span><span class="S8">)</span>
+<span class="S15">_GDIPlus_ImageDispose</span><span class="S8">(</span><span class="S9">$hImage</span><span class="S8">)</span>
+<span class="S15">_GDIPlus_Shutdown</span><span class="S8">()</span>
+
+<span class="S1">; Draw PNG image</span>
+<span class="S5">Func</span><span class="S0"> MY_WM_PAINT</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$msg</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$wParam</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lParam</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S12">#forceref $hWnd, $Msg, $wParam, $lParam</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S15">_WinAPI_RedrawWindow</span><span class="S8">(</span><span class="S9">$hGUI</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$RDW_UPDATENOW</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S15">_GDIPlus_GraphicsDrawImage</span><span class="S8">(</span><span class="S9">$hGraphic</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hImage</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S15">_WinAPI_RedrawWindow</span><span class="S8">(</span><span class="S9">$hGUI</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$RDW_VALIDATE</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$GUI_RUNDEFMSG</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;MY_WM_PAINT</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

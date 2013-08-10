@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function UBound</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>UBound</h1>
+<p class="funcdesc">Returns the size of array dimensions.<br></p>
+
+<p class="codeheader">
+UBound ( Array [, Dimension = 1] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">Array</td>
+    <td style="width:85%">The array variable which is being queried.</td>
+  </tr>
+  <tr>
+   <td>Dimension</td>
+   <td>	<b>[optional]</b> Which dimension of a multi-dimensioned array to report the size of.  Default is 1, which is the first dimension.  If this parameter is 0, the number of subscripts in the array is returned.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns the size of the array dimension.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 and sets @error:<br>
+       1 = Array given is not an array.<br>
+       2 = Array dimension is invalid.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+Remember that the value returned by UBound is one greater than the index of an array's last element!<br>
+<br>
+
+<h2>Related</h2>
+<a href="../keywords/Dim.htm">Global/Local</a>, <a href="../keywords/ReDim.htm">ReDim</a>, <a href="IsArray.htm">IsArray</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\UBound.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Array.au3&gt;</span><span class="S0"> </span><span class="S1">; Required for _ArrayDisplay.</span>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">10</span><span class="S8">][</span><span class="S3">20</span><span class="S8">]</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iRows</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$aArray</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Total number of rows. In this example it will be 10.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iCols</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$aArray</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Total number of columns. In this example it will be 20.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iDimension</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$aArray</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; The dimension of the array e.g. 1/2/3 dimensional.</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The array is a "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$iDimension</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" dimensional array with "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$iRows</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" row(s) &amp; "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$iCols</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" column(s)."</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Fill the array with data.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S9">$iRows</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$j</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S9">$iCols</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">][</span><span class="S9">$j</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Row: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" - Col: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$j</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Next</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S15">_ArrayDisplay</span><span class="S8">(</span><span class="S9">$aArray</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function DriveStatus</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>DriveStatus</h1>
+<p class="funcdesc">Returns the status of the drive as a string.<br></p>
+
+<p class="codeheader">
+DriveStatus ( "path" )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">path</td>
+    <td style="width:85%">Path of drive to receive information from.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table>
+  <tr>
+    <td style="width:15%"><b>Value</b></td>
+    <td style="width:85%"><b>Interpretation</b></td>
+  </tr>
+  <tr>
+   <td>UNKNOWN</td>
+   <td>Drive may be unformatted (RAW).</td>
+  </tr>
+  <tr>
+   <td>READY</td>
+   <td>Typical of hard drives and drives that contain removable media.</td>
+  </tr>
+  <tr>
+   <td>NOTREADY</td>
+   <td>Typical of floppy and CD drives that do not contain media.</td>
+  </tr>
+  <tr>
+   <td>INVALID</td>
+   <td>May indicate the drive letter does not exist or that a mapped network drive is inaccessible.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+The list of possible return values may be incomplete.<br>
+DriveStatus may even work when a complete directory path (which exists) is given.  However, a file path won't work.<br>
+<br>
+
+<h2>Related</h2>
+<a href="DriveGetDrive.htm">DriveGetDrive</a>, <a href="DriveGetFileSystem.htm">DriveGetFileSystem</a>, <a href="DriveGetLabel.htm">DriveGetLabel</a>, <a href="DriveGetSerial.htm">DriveGetSerial</a>, <a href="DriveGetType.htm">DriveGetType</a>, <a href="DriveSetLabel.htm">DriveSetLabel</a>, <a href="DriveSpaceFree.htm">DriveSpaceFree</a>, <a href="DriveSpaceTotal.htm">DriveSpaceTotal</a>, <a href="CDTray.htm">CDTray</a>, <a href="FileExists.htm">FileExists</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\DriveStatus.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sStatus</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DriveStatus</span><span class="S8">(</span><span class="S6">@HomeDrive</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Find the status of the home drive, generally this is the C:\ drive.</span>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Status: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sStatus</span><span class="S8">)</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

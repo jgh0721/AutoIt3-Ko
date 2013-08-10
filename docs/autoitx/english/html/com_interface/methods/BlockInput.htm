@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Method BlockInput</title>
+  <meta charset="ISO-8859-1">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Method Reference</h1>
+<hr style="height:0px">
+<h1>BlockInput</h1>
+<p class="funcdesc">Disable/enable the mouse and keyboard.<br></p>
+
+<p class="codeheader">
+BlockInput flag<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">flag</td>
+    <td style="width:85%">1 = Disable user input<br>
+       0 = Enable user input</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+None.<br>
+
+<h2>Remarks</h2>
+If BlockInput is enabled, the Alt keypress cannot be sent!<br>
+The table below shows how BlockInput behavior depends on Windows' version; however, pressing <i>Ctrl+Alt+Del</i> on any platform will re-enable input due to a Windows API feature.<br>
+<br>
+<table>
+  <tr>
+    <td style="width:15%"><b><i>Operating System</b></i></td>
+    <td style="width:85%"><b><i>"BlockInput" Results</b></i></td>
+  </tr>
+  <tr>
+   <td>Windows XP</td>
+   <td>User input is blocked and AutoIt can simulate mouse and keyboard input.  See remarks below for an issue with Windows XP SP1.</td>
+  </tr>
+  <tr>
+   <td>Windows Vista</td>
+   <td>User input is blocked and AutoIt can simulate mouse and keyboard if #RequireAdmin is used.</td>
+  </tr>
+</table><br>
+Note that functions such as WinMove() will still work.<br>
+<br>
+
+<h2>Related</h2>
+<a href="Send.htm">Send</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+Set oAutoIt = WScript.CreateObject("AutoItX3.Control")
+
+oAutoIt.BlockInput 1
+
+oAutoIt.Run "notepad.exe"
+oAutoIt.WinWaitActive "Untitled - Notepad"
+oAutoIt.Send "{F5}"
+
+oAutoIt.BlockInput 0
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

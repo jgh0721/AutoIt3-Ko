@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function InetGetInfo</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>InetGetInfo</h1>
+<p class="funcdesc">Returns detailed data for a handle returned from InetGet().<br></p>
+
+<p class="codeheader">
+InetGetInfo ( [ handle [, index = -1 ]] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">handle</td>
+    <td style="width:85%">	<b>[optional]</b> A handle return from InetGet().</td>
+  </tr>
+  <tr>
+   <td>index</td>
+   <td>	<b>[optional]</b> The index for the data to retrieve. If this value is -1 an array containing all of the below data will be returned.<br>
+       0 - Bytes read so far (this is updated while the download progresses).<br>
+       1 - The size of the download in bytes (this may not always be present).<br>
+       2 - Set to True if the download is complete, False if the download is still ongoing.<br>
+       3 - True if the download was successful.  If this is False then the next data member will be non-zero.<br>
+       4 - The error value for the download.  The value itself is arbitrary.  Testing that the value is non-zero is sufficient for determining if an error occurred.<br>
+       5 - The extended value for the download.  The value is arbitrary and is primarily only useful to the AutoIt developers.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">The request data.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>An empty string and @error is set to non-zero.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+If called with no arguments then the total number of active downloads will be returned.<br>
+<br>
+This function can be called in a loop to query the number of bytes download or to pause until a download is complete.<br>
+<br>
+
+<h2>Related</h2>
+<a href="InetGet.htm">InetGet</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\InetGetInfo.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Save the downloaded file to the temporary folder.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sFilePath</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S6">@TempDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\update.dat"</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Download the file in the background with the selected option of 'force a reload from the remote site.'</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hDownload</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InetGet</span><span class="S8">(</span><span class="S7">"http://www.autoitscript.com/autoit3/files/beta/update.dat"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@TempDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\update.dat"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Wait for the download to complete by monitoring when the 2nd index value of InetGetInfo returns True.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Do</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">250</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Until</span><span class="S0"> </span><span class="S4">InetGetInfo</span><span class="S8">(</span><span class="S9">$hDownload</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Retrieve details about the download file.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$aData</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InetGetInfo</span><span class="S8">(</span><span class="S9">$hDownload</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Return</span><span class="S0"> </span><span class="S4">SetError</span><span class="S8">(</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S4">FileDelete</span><span class="S8">(</span><span class="S9">$sFilePath</span><span class="S8">))</span><span class="S0"> </span><span class="S1">; If an error occurred the return from the function and delete the file.</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Close the handle returned by InetGet.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">InetClose</span><span class="S8">(</span><span class="S9">$hDownload</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display details about the downloaded file.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Bytes read: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aData</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Size: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aData</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Complete: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aData</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"successful: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aData</span><span class="S8">[</span><span class="S3">3</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"@error: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aData</span><span class="S8">[</span><span class="S3">4</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"@extended: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aData</span><span class="S8">[</span><span class="S3">5</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Delete the file.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">FileDelete</span><span class="S8">(</span><span class="S9">$sFilePath</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

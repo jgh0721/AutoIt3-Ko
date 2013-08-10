@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function HttpSetProxy</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>HttpSetProxy</h1>
+<p class="funcdesc">Sets the internet proxy to use for http access.<br></p>
+
+<p class="codeheader">
+HttpSetProxy ( mode = 0 [, "proxy:port" [, "username" [, "password" ]]] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">mode</td>
+    <td style="width:85%">The proxy mode to use:<br>
+       0 = (default) Use current Internet Explorer settings for proxy.<br>
+       1 = Use no proxy (direct access)<br>
+       2 = Use the proxy specified</td>
+  </tr>
+  <tr>
+   <td>proxy:port</td>
+   <td>	<b>[optional]</b> The address and port of the proxy to use.  See remarks below.</td>
+  </tr>
+  <tr>
+   <td>username</td>
+   <td>	<b>[optional]</b> If required, the username for the proxy</td>
+  </tr>
+  <tr>
+   <td>password</td>
+   <td>	<b>[optional]</b> If required, the password for the proxy</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+None.<br>
+
+<h2>Remarks</h2>
+Internet Explorer 3 or greater must be installed for this function to work.<br>
+<br>
+Only CERN proxy servers are supported.<br>
+<br>
+Proxy servers are usually made up of a web address and port number.  Most ISPs use the port number of 8080.  If your proxy was "www.proxy.com" and port was "8080" then you would use this to set the proxy:<br>
+HttpSetProxy(2, "www.proxy.com:8080")<br>
+<br>
+Most proxy servers do not require a username and password.<br>
+<br>
+When using mode 0 you may specify a username and password and these will be used with the Internet Explorer configured proxy.<br>
+<br>
+
+<h2>Related</h2>
+<a href="InetGet.htm">InetGet</a>, <a href="InetGetSize.htm">InetGetSize</a>, <a href="InetRead.htm">InetRead</a>, <a href="FtpSetProxy.htm">FtpSetProxy</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\HttpSetProxy.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S1">; Use no proxy</span>
+<span class="S4">HttpSetProxy</span><span class="S8">(</span><span class="S3">1</span><span class="S8">)</span>
+
+<span class="S1">; Use IE defaults for proxy</span>
+<span class="S4">HttpSetProxy</span><span class="S8">(</span><span class="S3">0</span><span class="S8">)</span>
+
+<span class="S1">; Use the proxy "www-cache.myisp.net" on port 8080</span>
+<span class="S4">HttpSetProxy</span><span class="S8">(</span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"www-cache.myisp.net:8080"</span><span class="S8">)</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

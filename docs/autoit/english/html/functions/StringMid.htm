@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function StringMid</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>StringMid</h1>
+<p class="funcdesc">Extracts a number of characters from a string.<br></p>
+
+<p class="codeheader">
+StringMid ( "string", start [, count = -1 ] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">string</td>
+    <td style="width:85%">The string to evaluate.</td>
+  </tr>
+  <tr>
+   <td>start</td>
+   <td>The character position to start.  (1 = first character)</td>
+  </tr>
+  <tr>
+   <td>count</td>
+   <td>	<b>[optional]</b> The number of characters to extract. By default the entire remainder of the string.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+Returns the extracted string.<br>
+
+<h2>Remarks</h2>
+If <i>start</i> is out-of-bounds, an empty string is returned.  If <i>start</i> is valid but count is out-of-bounds, the entire remainder of the string is returned.<br>
+<br>
+
+<h2>Related</h2>
+<a href="StringInStr.htm">StringInStr</a>, <a href="StringLeft.htm">StringLeft</a>, <a href="StringLen.htm">StringLen</a>, <a href="StringLower.htm">StringLower</a>, <a href="StringRight.htm">StringRight</a>, <a href="StringTrimLeft.htm">StringTrimLeft</a>, <a href="StringTrimRight.htm">StringTrimRight</a>, <a href="StringUpper.htm">StringUpper</a>, <a href="StringCompare.htm">StringCompare</a>, <a href="StringReplace.htm">StringReplace</a>, <a href="StringSplit.htm">StringSplit</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\StringMid.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S1">; Retrieve 5 characters from the 10th position in the string.</span>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sString</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringMid</span><span class="S8">(</span><span class="S7">"This is a sentence with whitespace."</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">)</span>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sString</span><span class="S8">)</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

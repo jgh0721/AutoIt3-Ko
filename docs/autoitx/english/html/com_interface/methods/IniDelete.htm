@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Method IniDelete</title>
+  <meta charset="ISO-8859-1">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Method Reference</h1>
+<hr style="height:0px">
+<h1>IniDelete</h1>
+<p class="funcdesc">Deletes a value from a standard format .ini file.<br></p>
+
+<p class="codeheader">
+IniDelete "filename", "section" [, "key"]<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">filename</td>
+    <td style="width:85%">The filename of the .ini file.</td>
+  </tr>
+  <tr>
+   <td>section</td>
+   <td>The section name in the .ini file.</td>
+  </tr>
+  <tr>
+   <td>key</td>
+   <td><b>Optional:</b> The key name in the in the .ini file.  If no key name is given the entire section is deleted.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if section/key is not found or if INI file is read-only.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+A standard ini file looks like:<br>
+<i>[SectionName]<br>
+Key=Value</i><br>
+If filename is not found, a 0 byte file is created.<br>
+<br>
+
+<h2>Related</h2>
+<a href="IniRead.htm">IniRead</a>, <a href="IniWrite.htm">IniWrite</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+Set oAutoIt = WScript.CreateObject("AutoItX3.Control")
+oAutoIt.IniDelete "C:\Temp\myfile.ini", "section2", "key"
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

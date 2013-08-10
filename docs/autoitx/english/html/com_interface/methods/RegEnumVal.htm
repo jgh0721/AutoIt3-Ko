@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Method RegEnumVal</title>
+  <meta charset="ISO-8859-1">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Method Reference</h1>
+<hr style="height:0px">
+<h1>RegEnumVal</h1>
+<p class="funcdesc">Reads the name of a value according to it's instance.<br></p>
+
+<p class="codeheader">
+RegEnumVal "keyname", instance<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">keyname</td>
+    <td style="width:85%">The registry key to read.</td>
+  </tr>
+  <tr>
+   <td>instance</td>
+   <td>The 1-based value instance to retrieve</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns the requested value name.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns "" and sets the @error flag:<br>
+       1 if unable to open requested key<br>
+       -1 if unable to retrieve requested value name (value instance out of range)</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+A registry key must start with "HKEY_LOCAL_MACHINE" ("HKLM") or "HKEY_USERS" ("HKU") or "HKEY_CURRENT_USER" ("HKCU") or "HKEY_CLASSES_ROOT" ("HKCR") or "HKEY_CURRENT_CONFIG" ("HKCC").<br>
+<br>
+
+<h2>Related</h2>
+<a href="RegEnumKey.htm">RegEnumKey</a>, <a href="RegDeleteKey.htm">RegDeleteKey</a>, <a href="RegDeleteVal.htm">RegDeleteVal</a>, <a href="RegWrite.htm">RegWrite</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+Set oAutoIt = WScript.CreateObject("AutoItX3.Control")
+var = oAutoIt.RegEnumVal("HKEY_CURRENT_USER\Software\AutoIt v3", 1)
+WScript.Echo "First Value Name under in AutoIt3 key" & var
+var = oAutoIt.RegEnumVal("HKEY_CURRENT_USER\Software\AutoIt v3", 2)
+WScript.Echo "Second Value Name under in AutoIt3 key: " & var
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

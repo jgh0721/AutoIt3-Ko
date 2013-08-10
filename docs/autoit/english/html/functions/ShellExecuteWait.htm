@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function ShellExecuteWait</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>ShellExecuteWait</h1>
+<p class="funcdesc">Runs an external program using the ShellExecute API and pauses script execution until it finishes.<br></p>
+
+<p class="codeheader">
+ShellExecuteWait ( "filename" [, "parameters" [, "workingdir" [, "verb" [, showflag]]]] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">filename</td>
+    <td style="width:85%">The name of the file to run (EXE, .txt, .lnk, etc).</td>
+  </tr>
+  <tr>
+   <td>parameters</td>
+   <td>	<b>[optional]</b> Any parameters for the program. Blank ("") uses none.</td>
+  </tr>
+  <tr>
+   <td>workingdir</td>
+   <td>	<b>[optional]</b> The working directory. Blank ("") uses the current working directory.</td>
+  </tr>
+  <tr>
+   <td>verb</td>
+   <td>	<b>[optional]</b> The "verb" to use, common verbs include:<br>
+       open = Opens the file specified. The file can be an executable file, a document file, or a folder<br>
+       edit = Launches an editor and opens the document for editing. If "filename" is not a document file, the function will fail<br>
+       print = Prints the document file specified. If "filename" is not a document file, the function will fail<br>
+       properties = Displays the file or folder's properties<br>
+       <b>See remarks for more information on the default behavior when a verb is not specified.</b></td>
+  </tr>
+  <tr>
+   <td>showflag</td>
+   <td>	<b>[optional]</b> The "show" flag of the executed program:<br>
+       @SW_HIDE = Hidden window<br>
+       @SW_MINIMIZE = Minimized window<br>
+       @SW_MAXIMIZE = Maximized window</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns the exit code of the program that was run.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 and sets @error to non-zero.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+After running the requested program the script pauses until the requested program terminates<br>
+<br>
+When no verb is specified the default verb is used.  The default verb is the verb configured in the registry.  If no verb is set as default in the registry then the "open" verb is used.  If the "open" verb is not present then the first verb listed in the registry is used.<br>
+<br>
+
+<h2>Related</h2>
+<a href="ShellExecute.htm">ShellExecute</a>, <a href="Run.htm">Run</a>, <a href="RunWait.htm">RunWait</a>, <a href="RunAs.htm">RunAs</a>, <a href="RunAsWait.htm">RunAsWait</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\ShellExecuteWait.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Execute Notepad and wait for the Notepad process to close.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iReturn</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ShellExecuteWait</span><span class="S8">(</span><span class="S7">"notepad.exe"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display the return code of the Notepad process.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The return code from Notepad was: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$iReturn</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

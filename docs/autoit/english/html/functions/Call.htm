@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function Call</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>Call</h1>
+<p class="funcdesc">Calls a user-defined or built-in function contained in first parameter.<br></p>
+
+<p class="codeheader">
+Call ( "function" [, param1 [, param2 [, param<i>N</i>]]] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">function</td>
+    <td style="width:85%">The name of function or function to call.</td>
+  </tr>
+  <tr>
+   <td>param</td>
+   <td>Arguments that will be passed to the function being invoked.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns the return value of the called function.  Both @error and @extended may contain values if the called function set them.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Sets @error to 0xDEAD and @extended to 0xBEEF if the function does not exist or invalid number of parameters.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+The <i>function</i> cannot be plug-in function.<br>
+A special array can be passed in lieu of individual parameters.  This array must have its first element set to "CallArgArray" and elements 1 - <i>n</i> will be passed as separate arguments to the function.  If using this special array, no other arguments can be passed to Call().  See example for a demonstration.<br>
+Both Call() itself can set @error or the called function can set @error.  If Call() sets @error the value will be 0xDEAD and @extended will also be set to 0xBEEF.  See the example for a demonstration of testing for a function that was not found.<br>
+<br>
+
+<h2>Related</h2>
+<a href="Execute.htm">Execute</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\Call.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; This calls a function accepting no arguments.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Call</span><span class="S8">(</span><span class="S7">"Test1"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; This calls a function accepting one argument and passes it an argument.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Call</span><span class="S8">(</span><span class="S7">"Test2"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Message from Call()!"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; This demonstrates how to use the special array argument.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Global</span><span class="S0"> </span><span class="S9">$aArgs</span><span class="S8">[</span><span class="S3">4</span><span class="S8">]</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$aArgs</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"CallArgArray"</span><span class="S0"> </span><span class="S1">; This is required, otherwise, Call() will not recognize the array as containing arguments</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$aArgs</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"This is a string"</span><span class="S0"> </span><span class="S1">; Parameter one is a string</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$aArgs</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">47</span><span class="S0"> </span><span class="S1">; Parameter two is a number</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Global</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Array Element 0"</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Array Element 1"</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$aArgs</span><span class="S8">[</span><span class="S3">3</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S0"> </span><span class="S1">; Parameter three is an array</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; We've built the special array, now call the function</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Call</span><span class="S8">(</span><span class="S7">"Test3"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$aArgs</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Test calling a function that does not exist. &nbsp;This shows the proper way to test by</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; checking that both @error and @extended contain the documented failure values.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$sFunction</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"DoesNotExist"</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Call</span><span class="S8">(</span><span class="S9">$sFunction</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0xDEAD</span><span class="S0"> </span><span class="S5">And</span><span class="S0"> </span><span class="S6">@extended</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0xBEEF</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Function does not exist."</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+
+<span class="S5">Func</span><span class="S0"> Test1</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Hello"</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Test1</span>
+
+<span class="S5">Func</span><span class="S0"> Test2</span><span class="S8">(</span><span class="S9">$sMsg</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sMsg</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Test2</span>
+
+<span class="S5">Func</span><span class="S0"> Test3</span><span class="S8">(</span><span class="S9">$sString</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nNumber</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The string is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sString</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The number is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$nNumber</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$aArray</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Array["</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"] contains:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">])</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Test3</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

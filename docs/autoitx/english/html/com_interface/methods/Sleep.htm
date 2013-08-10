@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Method Sleep</title>
+  <meta charset="ISO-8859-1">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Method Reference</h1>
+<hr style="height:0px">
+<h1>Sleep</h1>
+<p class="funcdesc">Pause script execution.<br></p>
+
+<p class="codeheader">
+Sleep delay<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">delay</td>
+    <td style="width:85%">Amount of time to pause (in milliseconds).</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+None.<br>
+
+<h2>Remarks</h2>
+Maximum sleep time is 2147483647 milliseconds (24 days).<br>
+<br>
+
+<h2>Related</h2>
+None.
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+Set oAutoIt = WScript.CreateObject("AutoItX3.Control")
+oAutoIt.Sleep 5000&nbsp;&nbsp;'five seconds
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

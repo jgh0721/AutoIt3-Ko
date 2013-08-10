@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function DirGetSize</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>DirGetSize</h1>
+<p class="funcdesc">Returns the size in bytes of a given directory.<br></p>
+
+<p class="codeheader">
+DirGetSize ( "path" [, flag = 0] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">path</td>
+    <td style="width:85%">The directory path to get the size from, e.g. "C:\Windows".</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>	<b>[optional]</b> this flag determines the behaviour and result of the function,<br>
+       and can be a combination of the following:<br>
+       0 = (default)<br>
+       1 = Extended mode is On -> returns an array that contains extended information (see Remarks).<br>
+       2 = Don't get the size of files in subdirectories (recursive mode is Off)</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns >= 0 the sizes</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns -1 and sets @error to 1 if the path doesn't exist.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+If the script is paused then this function is paused too and will only continue when the script continues!<br>
+<br>
+If you use the extended mode then the array returned from this function is a single dimension array containing the following elements:<br>
+$aArray[0] = Size<br>
+$aArray[1] = Files count<br>
+$aArray[2] = Dirs Count<br>
+<br>
+
+<h2>Related</h2>
+None.
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\DirGetSize.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$vSize</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DirGetSize</span><span class="S8">(</span><span class="S6">@HomeDrive</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Size(MegaBytes): "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">Round</span><span class="S8">(</span><span class="S9">$vSize</span><span class="S0"> </span><span class="S8">/</span><span class="S0"> </span><span class="S3">1024</span><span class="S0"> </span><span class="S8">/</span><span class="S0"> </span><span class="S3">1024</span><span class="S8">))</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$vSize</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DirGetSize</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Size(MegaBytes): "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">Round</span><span class="S8">(</span><span class="S9">$vSize</span><span class="S0"> </span><span class="S8">/</span><span class="S0"> </span><span class="S3">1024</span><span class="S0"> </span><span class="S8">/</span><span class="S0"> </span><span class="S3">1024</span><span class="S8">))</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hTimer</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TimerInit</span><span class="S8">()</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$vSize</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DirGetSize</span><span class="S8">(</span><span class="S7">"\\10.0.0.1\h$"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iDiff</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Round</span><span class="S8">(</span><span class="S4">TimerDiff</span><span class="S8">(</span><span class="S9">$hTimer</span><span class="S8">)</span><span class="S0"> </span><span class="S8">/</span><span class="S0"> </span><span class="S3">1000</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; time in seconds</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S4">IsArray</span><span class="S8">(</span><span class="S9">$vSize</span><span class="S8">)</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Size(Bytes): "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$vSize</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"Files: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$vSize</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"Dirs: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$vSize</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"TimeDiff(Sec): "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$iDiff</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

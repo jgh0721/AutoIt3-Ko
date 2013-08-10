@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function GUICtrlSetFont</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>GUICtrlSetFont</h1>
+<p class="funcdesc">Sets the font for a control.<br></p>
+
+<p class="codeheader">
+GUICtrlSetFont ( controlID, size [, weight [, attribute [, fontname [, quality]]]] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">controlID</td>
+    <td style="width:85%">The control identifier (controlID) as returned by a <a href="GUICtrlCreate Management.htm">GUICtrlCreate...</a> function, or -1 for the last created control.</td>
+  </tr>
+  <tr>
+   <td>size</td>
+   <td>Fontsize (default is 8.5).</td>
+  </tr>
+  <tr>
+   <td>weight</td>
+   <td>	<b>[optional]</b> The weight of the font in the range 0 through 1000. For example, 400 is normal and 700 is bold. If this value is zero, a default weight is used.<br>
+       The following values are defined for convenience.<br>
+       $FW_DONTCARE = 0 (Use the default font weight)<br>
+       $FW_THIN = 100<br>
+       $FW_EXTRALIGHT = 200<br>
+       $FW_LIGHT = 300<br>
+       $FW_NORMAL = 400<br>
+       $FW_MEDIUM = 500<br>
+       $FW_SEMIBOLD = 600<br>
+       $FW_BOLD = 700<br>
+       $FW_EXTRABOLD = 800<br>
+       $FW_HEAVY = 900<br>
+       Constants are defined in FontConstants.au3</td>
+  </tr>
+  <tr>
+   <td>attribute</td>
+   <td>	<b>[optional]</b> Font attributes, which can be a combination of the following added together:<br>
+       $GUI_FONTITALIC (2) = Italic<br>
+       $GUI_FONTUNDER (4) = Underlined<br>
+       $GUI_FONTSTRIKE (8) = Strike<br>
+       Constants are defined in GUIConstantsEx.au3</td>
+  </tr>
+  <tr>
+   <td>fontname</td>
+   <td>	<b>[optional]</b> Name of the font to use. (OS default GUI font is used if the font is "" or is not found).</td>
+  </tr>
+  <tr>
+   <td>quality</td>
+   <td>	<b>[optional]</b> Font quality to select. The following qualities are accepted:<br>
+       $DEFAULT_QUALITY (0) = Appearance of the font does not matter.<br>
+       $DRAFT_QUALITY (1) = Appearance of the font is less important than when $PROOF_QUALITY is used. For GDI raster fonts, scaling is enabled, which means that more font sizes are available, but the quality may be lower. Bold, italic, underline, and strikeout fonts are synthesized if necessary.<br>
+       $PROOF_QUALITY (2) = (default) Character quality of the font is more important than exact matching of the logical-font attributes. For GDI raster fonts, scaling is disabled and the font closest in size is chosen. Although the chosen font size may not be mapped exactly when $PROOF_QUALITY is used, the quality of the font is high and there is no distortion of appearance. Bold, italic, underline, and strikeout fonts are synthesized if necessary.<br>
+       $NONANTIALIASED_QUALITY (3) = Font is never antialiased.<br>
+       $ANTIALIASED_QUALITY (4) = Font is always antialiased if the font supports it and the size of the font is not too small or too large.<br>
+       $CLEARTYPE_QUALITY (5) = If set, text is rendered (when possible) using ClearType antialiasing method. See the remarks on the msdn page for LOGFONT for details about when cleartype is not available.<br>
+       If neither $ANTIALIASED_QUALITY nor $NONANTIALIASED_QUALITY is selected, the font is antialiased only if the user chooses smooth screen fonts in Control Panel.<br>
+       Constants are defined in FontConstants.au3</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+By default, controls use the font set by GUISetFont.<br>
+<br>
+Size can contain a decimal as in 8.5.<br>
+<br>
+For some controls such as labels, the default size can be 8.5 instead of 9 according to Windows Theme Values.<br>
+<br>
+See the Appendix for a complete list of Windows fonts and the Windows versions under which they are supported.<br>
+<br>
+For Quality parameter check MSDN, some windows XP installation need CLEARTYPE_QUALITY=5<br>
+<br>
+
+<h2>Related</h2>
+<a href="GUICtrlCreate Management.htm">GUICtrlCreate...</a>, <a href="GUISetFont.htm">GUISetFont</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\GUICtrlSetFont.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Font type to be used for setting the font of the controls.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$sFont</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Comic Sans Ms"</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Create a GUI with various controls.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hGUI</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Example"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Create label controls.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iLabel1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateLabel</span><span class="S8">(</span><span class="S7">"A string of text underlined"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">185</span><span class="S8">,</span><span class="S0"> </span><span class="S3">17</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetFont</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">9</span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sFont</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Set the font of the previous control.</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iLabel2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateLabel</span><span class="S8">(</span><span class="S7">"A string of italic text"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">30</span><span class="S8">,</span><span class="S0"> </span><span class="S3">185</span><span class="S8">,</span><span class="S0"> </span><span class="S3">17</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetFont</span><span class="S8">(</span><span class="S9">$iLabel2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">9</span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sFont</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Set the font of the controlid stored in $iLabel2.</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iLabel3</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateLabel</span><span class="S8">(</span><span class="S7">"A string of text with a strike through"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">290</span><span class="S8">,</span><span class="S0"> </span><span class="S3">17</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetFont</span><span class="S8">(</span><span class="S9">$iLabel3</span><span class="S8">,</span><span class="S0"> </span><span class="S3">9</span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S8">,</span><span class="S0"> </span><span class="S3">8</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sFont</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Set the font of the controlid stored in $iLabel3.</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iClose</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"Close"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">210</span><span class="S8">,</span><span class="S0"> </span><span class="S3">170</span><span class="S8">,</span><span class="S0"> </span><span class="S3">85</span><span class="S8">,</span><span class="S0"> </span><span class="S3">25</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display the GUI.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hGUI</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iClose</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Delete the previous GUI and all controls.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">(</span><span class="S9">$hGUI</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

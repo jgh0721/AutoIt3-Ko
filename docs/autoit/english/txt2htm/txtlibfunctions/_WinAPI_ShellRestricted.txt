@@ -1,0 +1,33 @@
+###User Defined Function###
+_WinAPI_ShellRestricted
+
+###Description###
+Determines whether a specified administrator policy is in effect.
+
+###Syntax###
+#include <WinAPIShellEx.au3>
+_WinAPI_ShellRestricted ( $iRestriction )
+
+
+###Parameters###
+@@ParamTable@@
+$iRestriction
+	A restriction. This parameter can be one of the $REST_* constants.
+@@End@@
+
+###ReturnValue###
+@@ReturnTable@@
+Success 	True - The specified restriction is in effect.
+Failure 	False.
+@@End@@
+
+
+###Remarks###
+None
+
+
+###Related###
+
+
+###See Also###
+@@MsdnLink@@ SHRestricted

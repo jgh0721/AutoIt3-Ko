@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function BinaryMid</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>BinaryMid</h1>
+<p class="funcdesc">Extracts a number of bytes from a binary variant.<br></p>
+
+<p class="codeheader">
+BinaryMid ( binary, start [, count] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">binary</td>
+    <td style="width:85%">The binary data to evaluate.</td>
+  </tr>
+  <tr>
+   <td>start</td>
+   <td>The byte position to start.  (1 = first byte)</td>
+  </tr>
+  <tr>
+   <td>count</td>
+   <td>	<b>[optional]</b> The number of bytes to extract. By default the entire remainder of the binary data.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+Returns the extracted binary data.<br>
+
+<h2>Remarks</h2>
+If <i>start</i> is out-of-bounds, an empty binary variant is returned.  If <i>start</i> is valid but count is out-of-bounds, the entire remainder of the binary data is returned.<br>
+<br>
+
+<h2>Related</h2>
+<a href="Binary.htm">Binary</a>, <a href="BinaryLen.htm">BinaryLen</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\BinaryMid.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$bBinary</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Binary</span><span class="S8">(</span><span class="S7">"0x10203040"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Create binary data from a string.</span>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$bExtract</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BinaryMid</span><span class="S8">(</span><span class="S9">$bBinary</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The 2nd and 3rd bytes are: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$bExtract</span><span class="S8">)</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

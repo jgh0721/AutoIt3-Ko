@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Keyword ContinueCase</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Keyword Reference</h1>
+<hr style="height:0px">
+<h1>ContinueCase</h1>
+<p class="funcdesc">Abort the current case and continue a case into the next case in a Select or Switch block.<br></p>
+
+<p class="codeheader">
+<b>ContinueCase</b><br>
+</p>
+
+<h2>Parameters</h2>
+None.<br>
+
+
+<h2>Remarks</h2>
+Normally in a Select or Switch block, a case ends when the next Case statement is encountered.  Executing the ContinueCase will tell AutoIt to stop executing the current case and start executing the next case.<br>
+<br>
+Trying to execute ContinueCase outside of a Select or Switch will cause a fatal error.<br>
+<br>
+
+<h2>Related</h2>
+<a href="Select.htm">Select...EndSelect</a>, <a href="Switch.htm">Switch...EndSwitch</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\ContinueCase.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$szName</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InputBox</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Please enter a word."</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">" M"</span><span class="S8">,</span><span class="S0"> </span><span class="S5">Default</span><span class="S8">,</span><span class="S0"> </span><span class="S5">Default</span><span class="S8">,</span><span class="S0"> </span><span class="S5">Default</span><span class="S8">,</span><span class="S0"> </span><span class="S5">Default</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S6">@error</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S3">2</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Timeout "</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ContinueCase</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S1">; Continuing previous case</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sMsg</span><span class="S0"> </span><span class="S8">&amp;=</span><span class="S0"> </span><span class="S7">"Cancellation"</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S3">0</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S9">$szName</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S7">"a"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"e"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"i"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"o"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"u"</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Vowel"</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S7">"QP"</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Mathematics"</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S7">"Q"</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S7">"QZ"</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Science"</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S5">Else</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Others"</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S5">Else</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Something went horribly wrong."</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndSwitch</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sMsg</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function DriveGetDrive</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>DriveGetDrive</h1>
+<p class="funcdesc">Returns an array containing the enumerated drives.<br></p>
+
+<p class="codeheader">
+DriveGetDrive ( "type" )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">type</td>
+    <td style="width:85%">Type of drive to find:<br>
+       "ALL", "CDROM", "REMOVABLE", "FIXED", "NETWORK", "RAMDISK", or "UNKNOWN"</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns an array of strings (drive letter followed by colon) of drives found.  The zeroth array element contains the number of drives.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns "" and sets @error to 1.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+None.<br>
+<br>
+
+<h2>Related</h2>
+<a href="DriveGetFileSystem.htm">DriveGetFileSystem</a>, <a href="DriveGetLabel.htm">DriveGetLabel</a>, <a href="DriveGetSerial.htm">DriveGetSerial</a>, <a href="DriveGetType.htm">DriveGetType</a>, <a href="DriveSetLabel.htm">DriveSetLabel</a>, <a href="DriveSpaceFree.htm">DriveSpaceFree</a>, <a href="DriveSpaceTotal.htm">DriveSpaceTotal</a>, <a href="DriveStatus.htm">DriveStatus</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\DriveGetDrive.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DriveGetDrive</span><span class="S8">(</span><span class="S7">"ALL"</span><span class="S8">)</span>
+<span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; An error occurred when retrieving the drives.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"It appears an error occurred."</span><span class="S8">)</span>
+<span class="S5">Else</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; Show all the drives found and convert the drive letter to uppercase.</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Drive "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"/"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">StringUpper</span><span class="S8">(</span><span class="S9">$aArray</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">]))</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span>
+<span class="S5">EndIf</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

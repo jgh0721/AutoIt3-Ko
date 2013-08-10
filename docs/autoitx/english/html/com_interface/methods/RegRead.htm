@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Method RegRead</title>
+  <meta charset="ISO-8859-1">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Method Reference</h1>
+<hr style="height:0px">
+<h1>RegRead</h1>
+<p class="funcdesc">Reads a value from the registry.<br></p>
+
+<p class="codeheader">
+RegRead "keyname", "valuename"<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">keyname</td>
+    <td style="width:85%">The registry key to read.</td>
+  </tr>
+  <tr>
+   <td>valuename</td>
+   <td>The value to read.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns the requested registry value value.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns numeric 1 and sets the oAutoIt.error flag:<br>
+       1 if unable to open requested key<br>
+       -1 if unable to open requested value<br>
+       -2 if value type not supported</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+A registry key must start with "HKEY_LOCAL_MACHINE" ("HKLM") or "HKEY_USERS" ("HKU") or "HKEY_CURRENT_USER" ("HKCU") or "HKEY_CLASSES_ROOT" ("HKCR") or "HKEY_CURRENT_CONFIG" ("HKCC").<br>
+<br>
+AutoIt supports registry keys of type REG_BINARY, REG_SZ, REG_MULTI_SZ, REG_EXPAND_SZ, REG_QWORD, and REG_DWORD.<br>
+<br>
+To access the <b>(Default)</b> value use <b>""</b> (a blank string) for the valuename.<br>
+<br>
+When reading a REG_BINARY key the result is a string of hex characters, e.g. the REG_BINARY value of 01,a9,ff,77 will be read as the string "01A9FF77".<br>
+<br>
+When reading a REG_MULTI_SZ key the multiple entries are seperated by a linefeed character.<br>
+<br>
+It is possible to access remote registries by using a keyname in the form "\\computername\keyname".  To use this feature you must have the correct access rights on XP/2003.<br>
+<br>
+
+<h2>Related</h2>
+<a href="RegDeleteKey.htm">RegDeleteKey</a>, <a href="RegDeleteVal.htm">RegDeleteVal</a>, <a href="RegWrite.htm">RegWrite</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+Set oAutoIt = WScript.CreateObject("AutoItX3.Control")
+var = oAutoIt.RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion", "ProgramFilesDir")
+WScript.Echo "Program files are in:" & var
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

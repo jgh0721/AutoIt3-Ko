@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function ObjCreate</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>ObjCreate</h1>
+<p class="funcdesc">Creates a reference to a COM object from the given classname.<br></p>
+
+<p class="codeheader">
+ObjCreate ( "classname" [, "servername" [,"username", ["password"]]] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">classname</td>
+    <td style="width:85%">The class of the object in the following format:<br>
+       "appname.objectype"<br>
+       It can also be a string representation of the CLSID.</td>
+  </tr>
+  <tr>
+   <td>servername</td>
+   <td>	<b>[optional]</b> name of a remote computer from which the<br>
+       object must be obtained.</td>
+  </tr>
+  <tr>
+   <td>username</td>
+   <td>	<b>[optional]</b> name of a usercode on the remote computer<br>
+       You have to enter this in the format "computer\usercode" or<br>
+       "domain\usercode".</td>
+  </tr>
+  <tr>
+   <td>password</td>
+   <td>	<b>[optional]</b> password for the usercode on the remote computer.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns an object.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 and sets @error to non-zero.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+Use ObjCreate() if you want to have a new instance of the referring application.<br>
+If you want to connect to an existing process, use ObjGet() instead.<br>
+<br>
+Keep in mind that not all computers have the same set of Objects. So <b>always</b> check for errors after calling ObjCreate().<br>
+<br>
+The following requirements apply if you want to access objects on <i>remote</i> computers:<br>
+-The user running the script must have the appropriate permissions.<br>
+-The Object on the remote computer must support DCOM (Distributed COM)<br>
+-The remote computer must have 'Remote Registry Service' and 'File and Printer sharing' services running.<br>
+<br>
+See the <a href="../intro/ComRef.htm">Obj/COM Reference</a> for more information about Objects.<br>
+<br>
+
+<h2>Related</h2>
+<a href="GUICtrlCreateObj.htm">GUICtrlCreateObj</a>, <a href="IsObj.htm">IsObj</a>, <a href="ObjEvent.htm">ObjEvent</a>, <a href="ObjGet.htm">ObjGet</a>, <a href="ObjName.htm">ObjName</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<h3>Example 1</h3>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\ObjCreate.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S1">; Counting the number of open shell windows</span>
+
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$oShell</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"shell.application"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Get the Windows Shell Object</span>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$oShellWindows</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$oShell</span><span class="S8">.</span><span class="S14">windows</span><span class="S0"> </span><span class="S1">; Get the collection of open shell Windows</span>
+
+<span class="S5">If</span><span class="S0"> </span><span class="S4">IsObj</span><span class="S8">(</span><span class="S9">$oShellWindows</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sString</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span><span class="S0"> </span><span class="S1">; String for displaying purposes</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$oWnd</span><span class="S0"> </span><span class="S5">In</span><span class="S0"> </span><span class="S9">$oShellWindows</span><span class="S0"> </span><span class="S1">; Count all existing shell windows</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sString</span><span class="S0"> </span><span class="S8">&amp;=</span><span class="S0"> </span><span class="S9">$oWnd</span><span class="S8">.</span><span class="S14">LocationName</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Shell Windows:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"You have the following shell windows:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sString</span><span class="S8">)</span>
+<span class="S5">EndIf</span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+<h3>Example 2</h3>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\ObjCreate[2].au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext1\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext1" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S1">; Open the MediaPlayer on a REMOTE computer</span>
+
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$oRemoteMedia</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"MediaPlayer.MediaPlayer.1"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"name-of-remote-computer"</span><span class="S8">)</span>
+
+<span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Remote ObjCreate Test"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ObjCreate() of a remote Mediaplayer Object successful !"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$oRemoteMedia</span><span class="S8">.</span><span class="S14">Open</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\media\tada.wav"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Play sound if file is present</span>
+<span class="S5">Else</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Remote ObjCreate Test"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Failed to open remote Object. Error code: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">Hex</span><span class="S8">(</span><span class="S6">@error</span><span class="S8">,</span><span class="S0"> </span><span class="S3">8</span><span class="S8">))</span>
+<span class="S5">EndIf</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

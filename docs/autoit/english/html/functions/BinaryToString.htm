@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function BinaryToString</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>BinaryToString</h1>
+<p class="funcdesc">Converts a binary variant into a string.<br></p>
+
+<p class="codeheader">
+BinaryToString ( expression [, flag = 1] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">expression</td>
+    <td style="width:85%">An expression to convert into a string.</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>	<b>[optional]</b> Changes how the binary data is converted:<br>
+       flag = 1 (default), binary data is taken to be ANSI<br>
+       flag = 2, binary data is taken to be UTF16 Little Endian<br>
+       flag = 3, binary data is taken to be UTF16 Big Endian<br>
+       flag = 4, binary data is taken to be UTF8</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">The string representation of the binary data.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>An empty string.  @error will bet set as follows:</td>
+  </tr>
+  <tr>
+    <td valign="top">@error:</td>
+    <td>1 - Input string had zero length.<br>
+       2 - Input string had an odd number of bytes but was supposed to be UTF16 (must contain an even number of bytes to be valid UTF16).</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+Unlike String() which returns a hexadecimal representation of binary data, this function will assume the binary data is a string value and convert it appropriately.<br>
+<br>
+
+<h2>Related</h2>
+<a href="Binary.htm">Binary</a>, <a href="IsBinary.htm">IsBinary</a>, <a href="String.htm">String</a>, <a href="StringToBinary.htm">StringToBinary</a>, <a href="StringToASCIIArray.htm">StringToASCIIArray</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\BinaryToString.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Define the string that will be converted later.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; NOTE: This string may show up as ?? in the help file and even in some editors.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; This example is saved as UTF-8 with BOM. &nbsp;It should display correctly in editors</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; which support changing code pages based on BOMs.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$sString</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Hello - ??"</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Temporary variables used to store conversion results. &nbsp;$bBinary will hold</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; the original string in binary form and $sConverted will hold the result</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; afte it's been transformed back to the original format.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$bBinary</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Binary</span><span class="S8">(</span><span class="S7">""</span><span class="S8">),</span><span class="S0"> </span><span class="S9">$sConverted</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert the original UTF-8 string to an ANSI compatible binary string.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$bBinary</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringToBinary</span><span class="S8">(</span><span class="S9">$sString</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert the ANSI compatible binary string back into a string.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sConverted</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BinaryToString</span><span class="S8">(</span><span class="S9">$bBinary</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display the resulsts. &nbsp;Note that the last two characters will appear</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; as ?? since they cannot be represented in ANSI.</span>
+<span class="S0">&nbsp; &nbsp; DisplayResults</span><span class="S8">(</span><span class="S9">$sString</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$bBinary</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sConverted</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ANSI"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert the original UTF-8 string to an UTF16-LE binary string.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$bBinary</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringToBinary</span><span class="S8">(</span><span class="S9">$sString</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert the UTF16-LE binary string back into a string.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sConverted</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BinaryToString</span><span class="S8">(</span><span class="S9">$bBinary</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display the resulsts.</span>
+<span class="S0">&nbsp; &nbsp; DisplayResults</span><span class="S8">(</span><span class="S9">$sString</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$bBinary</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sConverted</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"UTF16-LE"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert the original UTF-8 string to an UTF16-BE binary string.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$bBinary</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringToBinary</span><span class="S8">(</span><span class="S9">$sString</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert the UTF16-BE binary string back into a string.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sConverted</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BinaryToString</span><span class="S8">(</span><span class="S9">$bBinary</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display the resulsts.</span>
+<span class="S0">&nbsp; &nbsp; DisplayResults</span><span class="S8">(</span><span class="S9">$sString</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$bBinary</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sConverted</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"UTF16-BE"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert the original UTF-8 string to an UTF-8 binary string.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$bBinary</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringToBinary</span><span class="S8">(</span><span class="S9">$sString</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Convert the UTF8 binary string back into a string.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sConverted</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BinaryToString</span><span class="S8">(</span><span class="S9">$bBinary</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display the resulsts.</span>
+<span class="S0">&nbsp; &nbsp; DisplayResults</span><span class="S8">(</span><span class="S9">$sString</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$bBinary</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sConverted</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"UTF8"</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+
+<span class="S1">; Helper function which formats the message for display. &nbsp;It takes the following parameters:</span>
+<span class="S1">; $sOriginal - The original string before conversions.</span>
+<span class="S1">; $bBinary - The original string after it has been converted to binary.</span>
+<span class="S1">; $sConverted- The string after it has been converted to binary and then back to a string.</span>
+<span class="S1">; $sConversionType - A human friendly name for the encoding type used for the conversion.</span>
+<span class="S5">Func</span><span class="S0"> DisplayResults</span><span class="S8">(</span><span class="S9">$sOriginal</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$bBinary</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sConverted</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sConversionType</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Original:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sOriginal</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"Binary:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$bBinary</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sConversionType</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sConverted</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;DisplayResults</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

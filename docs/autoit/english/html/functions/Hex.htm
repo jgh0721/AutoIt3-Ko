@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function Hex</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>Hex</h1>
+<p class="funcdesc">Returns a string representation of an integer or of a binary type converted to hexadecimal.<br></p>
+
+<p class="codeheader">
+Hex ( expression [, length] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">expression</td>
+    <td style="width:85%">The expression to convert.</td>
+  </tr>
+  <tr>
+   <td>length</td>
+   <td>	<b>[optional]</b> Number of characters to be returned for integer.<br>
+       Characters are truncated from the left-hand side if length is too small.<br>
+       This parameter is ignored if the data is binary data.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns a string of <i>length</i> (never more than 16) characters, zero-padded if necessary for integer.<br>
+       Returns the  binary type converted.</td>
+  </tr>
+  <tr>
+    <td valign="top">Special:</td>
+    <td>Returns "" (empty string) if length is less than 1.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+Omitting the second parameter (<i>length</i>) or using the keyword Default results in automatic sizing of the output; 8-characters display for numbers that can fit in that and 16-characters display for others.<br>
+A pointer type parameter is displayed in size of pointer by default (8 characters for x86 and 16 characters for x64).<br>
+64bit integers have 16 characters displayed by default.<br>
+Numbers passed as non-integers (those with decimal separator or exponent) are processed as doubles.<br>
+<br>
+
+<h2>Related</h2>
+<a href="Dec.htm">Dec</a>, <a href="BitAND.htm">BitAND</a>, <a href="BitNOT.htm">BitNOT</a>, <a href="BitOR.htm">BitOR</a>, <a href="BitRotate.htm">BitRotate</a>, <a href="BitShift.htm">BitShift</a>, <a href="BitXOR.htm">BitXOR</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\Hex.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S1">; Assign a Local variable the hex number representation of 1033.</span>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$iHex1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Hex</span><span class="S8">(</span><span class="S3">1033</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span>
+
+<span class="S1">; Display the result.</span>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iHex1</span><span class="S8">)</span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

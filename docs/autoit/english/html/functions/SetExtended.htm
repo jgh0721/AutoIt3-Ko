@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function SetExtended</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>SetExtended</h1>
+<p class="funcdesc">Manually set the value of the @extended macro.<br></p>
+
+<p class="codeheader">
+SetExtended ( code [, return value ] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">code</td>
+    <td style="width:85%">The required value (integer) to set into the @extended macro.</td>
+  </tr>
+  <tr>
+   <td>return value</td>
+   <td>	<b>[optional]</b> The value to be returned by the function - if no parameter used the return value is undefined.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+The return value parameter (undefined if the parameter is not used)<br>
+@extended will be set to the values set in the function call (default = 0)<br>
+
+<h2>Remarks</h2>
+When entering a function @extended is set to 0. Unless SetExtended() is called, then @extended will remain 0 when the function ends. This means that in order for @extended to be set after a function returns, it must be explicitly set in the function. This also means you may need to backup the status of @extended in a variable if you are testing it in a While-WEnd loop.<br>
+<br>
+@extended is limited between the values of -2147483647 to 2147483647.<br>
+<br>
+
+<h2>Related</h2>
+<a href="SetError.htm">SetError</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\SetExtended.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S4">SetExtended</span><span class="S8">(</span><span class="S3">10</span><span class="S8">)</span>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Value of @extended is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@extended</span><span class="S8">)</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

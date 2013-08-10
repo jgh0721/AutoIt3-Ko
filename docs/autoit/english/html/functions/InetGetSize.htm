@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function InetGetSize</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>InetGetSize</h1>
+<p class="funcdesc">Returns the size (in bytes) of a file located on the internet.<br></p>
+
+<p class="codeheader">
+InetGetSize ( "URL" [, options = 0] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">URL</td>
+    <td style="width:85%">URL of the file to download.  See remarks below.</td>
+  </tr>
+  <tr>
+   <td>options</td>
+   <td>	<b>[optional]</b> 0 = (default) Get the file from local cache if available.<br>
+       1 = Forces a reload from the remote site.<br>
+       2 = Ignore all SSL errors (with HTTPS connections).<br>
+       4 = Use ASCII when transferring files with the FTP protocol (Can not be combined with flag 8).<br>
+       8 = Use BINARY when transferring files with the FTP protocol (Can not be combined with flag 4).  This is the default transfer mode if none are provided.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns the size of the file in bytes.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 and sets @error to non-zero.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+Internet Explorer 3 or greater must be installed for this function to work.  (For ftp:// URLs IE 5 is required!)<br>
+<br>
+The URL parameter should be in the form "http://www.somesite.com/path/file.html" - just like an address you would type into your web browser.<br>
+<br>
+To use a username and password when connecting simply prefix the servername with "username:password@", e.g.<br>
+"http://myuser:mypassword@www.somesite.com"<br>
+<br>
+Not all servers will correctly give the file size, especially when using a proxy server.<br>
+<br>
+
+<h2>Related</h2>
+<a href="InetGet.htm">InetGet</a>, <a href="InetRead.htm">InetRead</a>, <a href="HttpSetProxy.htm">HttpSetProxy</a>, <a href="FtpSetProxy.htm">FtpSetProxy</a>, <a href="HttpSetUserAgent.htm">HttpSetUserAgent</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\InetGetSize.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Retrieve the size of the file. The option of 'get the file from the local cache' has been selected.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iSize</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InetGetSize</span><span class="S8">(</span><span class="S7">"http://www.autoitscript.com/autoit3/files/beta/update.dat"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The size of the file: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$iSize</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function GUISwitch</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>GUISwitch</h1>
+<p class="funcdesc">Switches the current window used for GUI functions.<br></p>
+
+<p class="codeheader">
+GUISwitch ( winhandle [, tabitemID] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">winhandle</td>
+    <td style="width:85%">The handle of the window to switch to.</td>
+  </tr>
+  <tr>
+   <td>tabitemID</td>
+   <td>	<b>[optional]</b> controlID of the tabitem control to be selected.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns the handle of the previously current.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns a NULL handle.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+Many of the GUI specific functions work on the &quot;current&quot; window - this is usually the last window created with GUICreate.  This function allows you to make another window "current". That's does not mean that the referenced window will become active. You have to use WinActivate.<br>
+<br>
+Using the tabitemID allow to create new control in the specified tabitem control. Don't forget to close tabitem definition GUICtrlCreateTabItem("")<br>
+<br>
+
+<h2>Related</h2>
+<a href="GUICreate.htm">GUICreate</a>, <a href="GUIDelete.htm">GUIDelete</a>, <a href="GUICtrlCreateTabItem.htm">GUICtrlCreateTabItem</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\GUISwitch.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hGUIParent1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hGUIParent2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iTabItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hGUIParent1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Parent1"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateTab</span><span class="S8">(</span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$iTabItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateTabItem</span><span class="S8">(</span><span class="S7">"tab1"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateTabItem</span><span class="S8">(</span><span class="S7">"tab2"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateTabItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hGUIParent2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Parent2"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISwitch</span><span class="S8">(</span><span class="S9">$hGUIParent2</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISwitch</span><span class="S8">(</span><span class="S9">$hGUIParent1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iTabItem</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"OK"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateTabItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hGUIParent1</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">(</span><span class="S9">$hGUIParent1</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">(</span><span class="S9">$hGUIParent2</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

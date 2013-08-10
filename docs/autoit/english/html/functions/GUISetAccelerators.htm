@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function GUISetAccelerators</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>GUISetAccelerators</h1>
+<p class="funcdesc">Sets the accelerator table to be used in a GUI window.<br></p>
+
+<p class="codeheader">
+GUISetAccelerators ( accelerators [, winhandle] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">accelerators</td>
+    <td style="width:85%">A 2 dimensional array holding the accelerator table (See remarks).</td>
+  </tr>
+  <tr>
+   <td>winhandle</td>
+   <td>	<b>[optional]</b> Windows handle as returned by GUICreate (default is the previously used window).</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+The array passed to this function contains the hotkey and the control ID of the accelerator. The array must be defined as Local/Global $aArray[n][2] - where n is the number of accelerator keys to set:<br>
+<br>
+$aArray[0][0] = Hotkey (in HotKeySet() format) of 1st accelerator<br>
+$aArray[0][1] = Control ID of the 1st accelerator, as returned by GUICtrlCreate...()<br>
+$aArray[1][0] = Hotkey of 2nd accelerator<br>
+$aArray[1][1] = Control ID of the 2nd accelerator<br>
+...<br>
+$aArray[n][0] = Hotkey of nth accelerator<br>
+$aArray[n][1] = Control ID of the nth accelerator<br>
+<br>
+Passing this function a non-array will unset all accelerators for the given winhandle.<br>
+<br>
+
+<h2>Related</h2>
+<a href="GUICreate.htm">GUICreate</a>, <a href="HotKeySet.htm">HotKeySet</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\GUISetAccelerators.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Custom MsgBox"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">225</span><span class="S8">,</span><span class="S0"> </span><span class="S3">80</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateLabel</span><span class="S8">(</span><span class="S7">"Please select a button."</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iYesID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"Yes"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">65</span><span class="S8">,</span><span class="S0"> </span><span class="S3">25</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iNoID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"No"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">80</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">65</span><span class="S8">,</span><span class="S0"> </span><span class="S3">25</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iExitID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"Exit"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">150</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">65</span><span class="S8">,</span><span class="S0"> </span><span class="S3">25</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Set GUIAccelerators for the button controlIDs, these being Ctrl + y and Ctrl + n</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$aAccelKeys</span><span class="S8">[</span><span class="S3">2</span><span class="S8">][</span><span class="S3">2</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">[[</span><span class="S7">"^y"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iYesID</span><span class="S8">],[</span><span class="S7">"^n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iNoID</span><span class="S8">]]</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetAccelerators</span><span class="S8">(</span><span class="S9">$aAccelKeys</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><span class="S0"> </span><span class="S1">; Display the GUI.</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You selected"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Close"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$iYesID</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You selected"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Yes"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Displays if the button was selected or the hotkey combination Ctrl + y was pressed.</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$iNoID</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You selected"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"No"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Displays if the button was selected or the hotkey combination Ctrl + n was pressed.</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$iExitID</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You selected"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Exit"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">()</span><span class="S0"> </span><span class="S1">; Delete the GUI.</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

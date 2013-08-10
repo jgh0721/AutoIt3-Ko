@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Method PixelSearch</title>
+  <meta charset="ISO-8859-1">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Method Reference</h1>
+<hr style="height:0px">
+<h1>PixelSearch</h1>
+<p class="funcdesc">Searches a rectangle of pixels for the pixel color provided.<br></p>
+
+<p class="codeheader">
+PixelSearch left, top, right, bottom, color [, shade-variation] [, step]]<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">left</td>
+    <td style="width:85%">left coordinate of rectangle.</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td>top coordinate of rectangle.</td>
+  </tr>
+  <tr>
+   <td>right</td>
+   <td>right coordinate of rectangle.</td>
+  </tr>
+  <tr>
+   <td>bottom</td>
+   <td>bottom coordinate of rectangle.</td>
+  </tr>
+  <tr>
+   <td>color</td>
+   <td>color value of pixel to find (in decimal or hex).</td>
+  </tr>
+  <tr>
+   <td>shade-variation</td>
+   <td><b>Optional:</b> A number between 0 and 255 to indicate the allowed number of shades of variation of the red, green, and blue components of the color. Default is 0 (exact match).</td>
+  </tr>
+  <tr>
+   <td>step</td>
+   <td><b>Optional:</b> Instead of searching each pixel use a value larger than 1 to skip pixels (for speed).  E.g. A value of 2 will only check every other pixel.  Default is 1.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns a 2 element array containing the pixel's coordinates</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Sets oAutoIt.error to 1 if color is not found.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+The search is performed top-to-bottom, left-to-right, and the first match is returned.<br>
+<br>
+Performing a search of a region can be time consuming, so use the smallest region you are able to reduce CPU load.<br>
+<br>
+
+<h2>Related</h2>
+<a href="PixelChecksum.htm">PixelChecksum</a>, <a href="PixelGetColor.htm">PixelGetColor</a>, <a href="AutoItSetOption.htm#PixelCoordMode">PixelCoordMode (Option)</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+Set oAutoIt = WScript.CreateObject("AutoItX3.Control")
+
+value = oAutoIt.PixelSearch(0,0, 100, 100, 0)
+If oAutoIt.error = 1 Then
+&nbsp;&nbsp;WScript.Echo "Color not found"
+Else
+&nbsp;&nbsp;WScript.Echo "Color found at: " & value(0) & "," & value(1)
+End If
+
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function IniWrite</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>IniWrite</h1>
+<p class="funcdesc">Writes a value to a standard format .ini file.<br></p>
+
+<p class="codeheader">
+IniWrite ( "filename", "section", "key", "value" )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">filename</td>
+    <td style="width:85%">The filename of the .ini file.</td>
+  </tr>
+  <tr>
+   <td>section</td>
+   <td>The section name in the .ini file.</td>
+  </tr>
+  <tr>
+   <td>key</td>
+   <td>The key name in the in the .ini file.</td>
+  </tr>
+  <tr>
+   <td>value</td>
+   <td>The value to write/change.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if file is read-only.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+A standard ini file looks like:<br>
+<i>[SectionName]<br>
+Key=Value</i><br>
+<br>
+If the file does not already exist, it is created so long as the directory exists. Keys and/or sections are added to the end and are not sorted in any way.<br>
+<br>
+If you would like to wrap quotes around an ini value, then you need to double up the quotation marks as the first set of quotation marks are stripped. For example: ""This is a test"" will produce "This is a test" when using IniRead or such-like.<br>
+<br>
+Leading and trailing whitespace is stripped. In order to preserve the whitespace, the string must be quoted.  For example, "    this is a test" will preserve the whitespace but per above, the quotation marks are stripped.<br>
+<br>
+Multi-line values are not possible.<br>
+<br>
+If you want to use an ini file with Unicode encoding, first create an .ini file by using the FileOpen function with the mode parameter set to a Unicode parameter.<br>
+<br>
+
+<h2>Related</h2>
+<a href="IniDelete.htm">IniDelete</a>, <a href="IniRead.htm">IniRead</a>, <a href="IniReadSection.htm">IniReadSection</a>, <a href="IniReadSectionNames.htm">IniReadSectionNames</a>, <a href="IniWriteSection.htm">IniWriteSection</a>, <a href="IniRenameSection.htm">IniRenameSection</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\IniWrite.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Write the value of 'AutoIt' to the key 'Title' and in the section labelled 'General'.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">IniWrite</span><span class="S8">(</span><span class="S6">@ScriptDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Example.ini"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"General"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Title"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"AutoIt"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Read the INI file for the value of 'Title' in the section labelled 'General'.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sRead</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">IniRead</span><span class="S8">(</span><span class="S6">@ScriptDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Example.ini"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"General"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Title"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Default Value"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display the value returned by IniRead.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The value of 'Title' in the section labelled 'General' is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sRead</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Delete the key labelled 'Title'.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">IniDelete</span><span class="S8">(</span><span class="S6">@ScriptDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Example.ini"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"General"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Title"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Read the INI file for the value of 'Title' in the section labelled 'General'.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sRead</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">IniRead</span><span class="S8">(</span><span class="S6">@ScriptDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Example.ini"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"General"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Title"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Default Value"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display the value returned by IniRead. Since there is no key stored the value will be the 'Default Value' passed to IniRead.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The value of 'Title' in the section labelled 'General' is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sRead</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Delete the INI file.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">FileDelete</span><span class="S8">(</span><span class="S6">@ScriptDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Example.ini"</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

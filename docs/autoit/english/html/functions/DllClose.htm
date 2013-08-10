@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function DllClose</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>DllClose</h1>
+<p class="funcdesc">Closes a previously opened DLL.<br></p>
+
+<p class="codeheader">
+DllClose ( dllhandle )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">dllhandle</td>
+    <td style="width:85%">The handle of a dll, as returned by a previous call to DllOpen.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+None.<br>
+
+<h2>Remarks</h2>
+Upon termination, AutoIt automatically closes any dlls it opened but calling DllClose is still a good idea.<br>
+<br>
+
+<h2>Related</h2>
+<a href="DllCall.htm">DllCall</a>, <a href="DllOpen.htm">DllOpen</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\DllClose.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hDLL</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllOpen</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">)</span>
+<span class="S4">DllCall</span><span class="S8">(</span><span class="S9">$hDLL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MessageBox"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"str"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Some text"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"str"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Some title"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span>
+<span class="S4">DllClose</span><span class="S8">(</span><span class="S9">$hDLL</span><span class="S8">)</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

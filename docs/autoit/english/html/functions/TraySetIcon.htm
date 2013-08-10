@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function TraySetIcon</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>TraySetIcon</h1>
+<p class="funcdesc">Loads/Sets a specified tray icon.<br></p>
+
+<p class="codeheader">
+TraySetIcon ( [filename [, iconID]] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">filename</td>
+    <td style="width:85%">	<b>[optional]</b> The filename of the icon to be display in the tray.</td>
+  </tr>
+  <tr>
+   <td>iconID</td>
+   <td>	<b>[optional]</b> Icon identifier if the file contains multiple icons.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+None.<br>
+
+<h2>Remarks</h2>
+To reset the icon to the default, use the function with no parameters:<br>
+TraySetIcon().<br>
+<br>
+Passing a positive number will reference the string equivalent icon name.<br>
+Passing a negative number causes 1-based "index" behaviour. Some Dll can have icon extracted just with negative numbers.<br>
+<br>
+The filename parameter can be set to "blank", "info", "question", "stop" or "warning" to select some corresponding standard icon.<br>
+<br>
+
+<h2>Related</h2>
+<a href="TraySetPauseIcon.htm">TraySetPauseIcon</a>, <a href="TraySetState.htm">TraySetState</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\TraySetIcon.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#NoTrayIcon</span>
+
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayMenuMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; The default tray menu items will not be shown and items are not checked when selected. These are options 1 and 2 for TrayMenuMode.</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iExit</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Exit"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">TraySetState</span><span class="S8">(</span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Show the tray menu.</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hTimer</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TimerInit</span><span class="S8">()</span><span class="S0"> </span><span class="S1">; Begin the timer and store the handle in a variable.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iDiff</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iIndex</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$iDiff</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TimerDiff</span><span class="S8">(</span><span class="S9">$hTimer</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Find the difference in time from the previous call of TimerInit</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$iDiff</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S3">1000</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S1">; If the difference is greater than 1 second then change the tray menu icon.</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$iIndex</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S4">Random</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Use a negative number for ordinal numbering.</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">TraySetToolTip</span><span class="S8">(</span><span class="S7">"Currently using the icon shell32.dll, "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$iIndex</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"."</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Set the tray menu tooltip with information about the icon index.</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">TraySetIcon</span><span class="S8">(</span><span class="S7">"shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iIndex</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Set the tray menu icon using the shell32.dll and the random index number.</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$hTimer</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TimerInit</span><span class="S8">()</span><span class="S0"> </span><span class="S1">; Reset the timer.</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndIf</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S4">TrayGetMsg</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$iExit</span><span class="S0"> </span><span class="S1">; Exit the loop.</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

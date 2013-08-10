@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function FileGetShortcut</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>FileGetShortcut</h1>
+<p class="funcdesc">Retrieves details about a shortcut.<br></p>
+
+<p class="codeheader">
+FileGetShortcut ( "lnk" )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">lnk</td>
+    <td style="width:85%">Full path and file name of the shortcut.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns an array that contains the shortcut information.  See Remarks.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Sets @error to 1 if the shortcut could not be accessed.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+The array returned from this function is a single dimension array containing the following elements:<br>
+$aArray[0] = Shortcut target path<br>
+$aArray[1] = Working directory<br>
+$aArray[2] = Arguments<br>
+$aArray[3] = Description<br>
+$aArray[4] = Icon filename<br>
+$aArray[5] = Icon index<br>
+$aArray[6] = The shortcut state (@SW_SHOWNORMAL, @SW_SHOWMINNOACTIVE, @SW_SHOWMAXIMIZED)<br>
+<br>
+
+<h2>Related</h2>
+<a href="FileCreateShortcut.htm">FileCreateShortcut</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\FileGetShortcut.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Create a constant variable in Local scope of the shortcut filepath.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$sFilePath</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S6">@DesktopDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\FileGetShortcutExample.lnk"</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Create a shortcut on the desktop to explorer.exe and set the hotkey combination Ctrl+Alt+T or in AutoIt ^!t to the shortcut.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">FileCreateShortcut</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\explorer.exe"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sFilePath</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@WindowsDir</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"/e,c:\"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Tooltip description of the shortcut."</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"^!t"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"15"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_MINIMIZE</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Retrieve details about the shortcut.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$aDetails</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileGetShortcut</span><span class="S8">(</span><span class="S9">$sFilePath</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Path: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aDetails</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Working directory: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aDetails</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Arguments: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aDetails</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Description: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aDetails</span><span class="S8">[</span><span class="S3">3</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Icon filename: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aDetails</span><span class="S8">[</span><span class="S3">4</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Icon index: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aDetails</span><span class="S8">[</span><span class="S3">5</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Shortcut state: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$aDetails</span><span class="S8">[</span><span class="S3">6</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Delete the shortcut.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">FileDelete</span><span class="S8">(</span><span class="S9">$sFilePath</span><span class="S8">)</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

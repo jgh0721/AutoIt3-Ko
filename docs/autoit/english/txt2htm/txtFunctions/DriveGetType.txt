@@ -1,0 +1,41 @@
+###Function###
+DriveGetType
+
+###Description###
+Returns drive type.
+
+###Syntax###
+DriveGetType ( "path" [, mode = 1] )
+
+
+###Parameters###
+@@ParamTable@@
+path
+	Path of drive to receive information from.
+operation
+	[optional] The drive type operation to perform.
+@@End@@
+
+###ReturnValue###
+@@ReturnTable@@
+Success:	See remarks.
+Failure:	Sets @error to 1 if a bad path was given, or if the operation failed. Return value is "".
+@@End@@
+
+
+###Remarks###
+If the mode parameter is 1, returns the type of drive. The path must be a string volume name, such as "C:\". Return values are:
+"Unknown",  "Removable",  "Fixed",  "Network",  "CDROM",  "RAMDisk"
+
+If the mode parameter is 2, returns the SSD status of the drive. The path can be a string volume name, or an integer drive index. Return values are:
+"SSD", "" (blank)
+
+If the mode parameter is 3, returns the bus type of the drive. The path can be a string volume name, or an integer drive index. Return values are:
+"Unknown", "SCSI", "ATAPI", "ATA", "1394", "SSA", "Fibre", "USB", "RAID", "iSCSI", "SAS", "SATA", "SD", "MMC", "Virtual", "FileBackedVirtual"
+
+###Related###
+DriveGetDrive, DriveGetFileSystem, DriveGetLabel, DriveGetSerial, DriveSetLabel, DriveSpaceFree, DriveSpaceTotal, DriveStatus, CDTray
+
+
+###Example###
+@@IncludeExample@@

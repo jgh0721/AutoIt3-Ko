@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function GUISetCursor</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>GUISetCursor</h1>
+<p class="funcdesc">Sets the mouse cursor icon for a GUI window.<br></p>
+
+<p class="codeheader">
+GUISetCursor ( [ cursorID [, override = 0 [, winhandle ]]] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">cursorID</td>
+    <td style="width:85%">	<b>[optional]</b> Cursor Id (See Remarks).</td>
+  </tr>
+  <tr>
+   <td>override</td>
+   <td>	<b>[optional]</b> Force the requested mouse cursor even when over controls (see below).<br>
+       0 = (default) Don't override a control's default mouse cursor.<br>
+       1= override control's default mouse cursor.</td>
+  </tr>
+  <tr>
+   <td>winhandle</td>
+   <td>	<b>[optional]</b> Windows handle as returned by GUICreate (default is the previously used Window).</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+None.<br>
+
+<h2>Remarks</h2>
+If the cursorID is invalid the standard arrow will be displayed.<br>
+<br>
+Usually when you move the mouse cursor over an edit control or other control the mouse cursor changes shape.  The "override" option allows you to force the requested mouse cursor to be shown at all times.  Note: If you have changed a controls mouse cursor with GUICtrlSetCursor then this control mouse cursor will always be shown.<br>
+<br>
+For a list of valid cursor IDs see <a href="MouseGetCursor.htm">MouseGetCursor</a>.<br>
+CursorId = 16 will hide the mouse cursor.<br>
+<br>
+
+<h2>Related</h2>
+<a href="GUICtrlSetCursor.htm">GUICtrlSetCursor</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\GUISetCursor.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span>
+
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$iIDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iNewIDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{ESC}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Increment"</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Press ESC to Increment"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$iNewIDC</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S9">$iIDC</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$iIDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$iNewIDC</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">GUISetCursor</span><span class="S8">(</span><span class="S9">$iIDC</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndIf</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">ToolTip</span><span class="S8">(</span><span class="S7">"GUI Cursor #"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$iIDC</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">()</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+
+<span class="S5">Func</span><span class="S0"> Increment</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$iNewIDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$iIDC</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$iNewIDC</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S3">15</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S9">$iNewIDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Increment</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

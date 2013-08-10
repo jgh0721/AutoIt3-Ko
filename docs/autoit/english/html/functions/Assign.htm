@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function Assign</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>Assign</h1>
+<p class="funcdesc">Assigns a variable by name with the data.<br></p>
+
+<p class="codeheader">
+Assign ( "varname", "data" [, flag = 0] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">varname</td>
+    <td style="width:85%">The name of the variable you wish to assign. Cannot be an array element.</td>
+  </tr>
+  <tr>
+   <td>data</td>
+   <td>The data you wish to assign to the variable.</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td>	<b>[optional]</b> controls the way that variables are assigned (add required options together):<br>
+       0 = (default) Create variable if required<br>
+       1 = Force creation in local scope<br>
+       2 = Force creation in global scope<br>
+       4 = Fail if variable does not already exist</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns 1.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns 0 if unable to create/assign the variable.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+If there is a need to use Assign() to create/write to a variable, then in most situations, Eval() should be used to read the variable and IsDeclared() should be used to check that the variable exists.<br>
+<br>
+
+<h2>Related</h2>
+<a href="Eval.htm">Eval</a>, <a href="IsDeclared.htm">IsDeclared</a>, <a href="Execute.htm">Execute</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\Assign.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S1">; Assign the variable string sString with data.</span>
+<span class="S4">Assign</span><span class="S8">(</span><span class="S7">"sString"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"This is a string which is declared using the function Assign"</span><span class="S8">)</span>
+
+<span class="S1">; Find the value of the variable string sString and assign to the variable $sEvalString.</span>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sEvalString</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Eval</span><span class="S8">(</span><span class="S7">"sString"</span><span class="S8">)</span>
+
+<span class="S1">; Display the value of $sEvalString. This should be the same value as $sString.</span>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sEvalString</span><span class="S8">)</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Method RunAsSet</title>
+  <meta charset="ISO-8859-1">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Method Reference</h1>
+<hr style="height:0px">
+<h1>RunAsSet</h1>
+<p class="funcdesc">Initialise a set of user credentials to use during Run and RunWait operations. 2000/XP or later ONLY.<br></p>
+
+<p class="codeheader">
+RunAsSet ["user", "domain", "password"] [, options]<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">username</td>
+    <td style="width:85%">The user name to use.</td>
+  </tr>
+  <tr>
+   <td>domain</td>
+   <td>The domain name to use.</td>
+  </tr>
+  <tr>
+   <td>password</td>
+   <td>The password to use.</td>
+  </tr>
+  <tr>
+   <td>options</td>
+   <td><b>Optional:</b> 0 = do not load the user profile, 1 = (default) load the user profile, 2 = use for net credentials only</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+Returns 0 if the operating system does not support this function.<br>
+Otherwise returns 1--regardless of success.  (If the login information was invalid, subsequent Run/RunWait commands will fail....)<br>
+
+<h2>Remarks</h2>
+This function allows subsequent Run and RunWait functions to run as a different user (e.g. Administrator).<br>
+<br>
+The "Secondary Logon service" or "RunAs service" must not be disabled if you want this function to work.<br>
+<br>
+To unset the RunAs details, use the function with no parameters: RunAsSet().<br>
+<br>
+
+<h2>Related</h2>
+<a href="RunAsSet.htm">RunAsSet</a>, <a href="RunWait.htm">RunWait</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+Set oAutoIt = WScript.CreateObject("AutoItX3.Control")
+
+' Set the RunAs parameters to use local administrator account
+oAutoIt.RunAsSet "Administrator", "MyDom", "adminpassword"
+
+' Run registry editor as admin
+oAutoIt.RunWait "regedit.exe"
+
+' Reset user's permissions
+oAutoIt.RunAsSet
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

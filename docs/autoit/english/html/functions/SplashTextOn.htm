@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function SplashTextOn</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>SplashTextOn</h1>
+<p class="funcdesc">Creates a customizable text popup window.<br></p>
+
+<p class="codeheader">
+SplashTextOn ( "title", "text" [, w = 500 [, h = 400 [, x pos [, y pos [, opt = 0 [, "fontname" [, fontsz = 12 [, fontwt]]]]]]]] )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">title</td>
+    <td style="width:85%">Title for splash window.</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>Text for splash window.</td>
+  </tr>
+  <tr>
+   <td>w</td>
+   <td>	<b>[optional]</b> Width of window in pixels. (default 500)</td>
+  </tr>
+  <tr>
+   <td>h</td>
+   <td>	<b>[optional]</b> Height of window in pixels. (default 400)</td>
+  </tr>
+  <tr>
+   <td>x pos</td>
+   <td>	<b>[optional]</b> Position from left (in pixels) of splash window. (default is centered)</td>
+  </tr>
+  <tr>
+   <td>y pos</td>
+   <td>	<b>[optional]</b> Position from top (in pixels) of splash window. (default is centered)</td>
+  </tr>
+  <tr>
+   <td>opt</td>
+   <td>	<b>[optional]</b> Add them up - default is 'center justified/always on top/with title'<br>
+       0 = Center justified/always on top/with title (default)<br>
+       $DLG_NOTITLE (1) = Thin bordered titleless window<br>
+       $DLG_NOTONTOP (2) = Without "always on top" attribute<br>
+       $DLG_TEXTLEFT (4) = Left justified text<br>
+       $DLG_TEXTRIGHT (8) = Right justified text<br>
+       $DLG_MOVEABLE (16) = Windows can be moved<br>
+       $DLG_TEXTVCENTER (32) = Center text vertically<br>
+       Constants are defined in Constants.au3</td>
+  </tr>
+  <tr>
+   <td>fontname</td>
+   <td>	<b>[optional]</b> Name of the font to use. (OS default GUI font is used if the font is "" or is not found)</td>
+  </tr>
+  <tr>
+   <td>fontsz</td>
+   <td>	<b>[optional]</b> Font size. (default is 12; standard sizes are 6 8 9 10 11 12 14 16 18 20 22 24 26 28 36 48 72)</td>
+  </tr>
+  <tr>
+   <td>fontwt</td>
+   <td>	<b>[optional]</b> The weight of the font in the range 0 through 1000. For example, 400 is normal and 700 is bold. If this value is zero, a default weight is used.<br>
+       The following values are defined for convenience.<br>
+       $FW_DONTCARE = 0 (Use the default font weight)<br>
+       $FW_THIN = 100<br>
+       $FW_EXTRALIGHT = 200<br>
+       $FW_LIGHT = 300<br>
+       $FW_NORMAL = 400<br>
+       $FW_MEDIUM = 500<br>
+       $FW_SEMIBOLD = 600<br>
+       $FW_BOLD = 700<br>
+       $FW_EXTRABOLD = 800<br>
+       $FW_HEAVY = 900<br>
+       Constants are defined in FontConstants.au3</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+Return the Handle of the splash window that can be used in ControlSetText.<br>
+
+<h2>Remarks</h2>
+To skip an optional parameter, leaving its default value intact, use:<br>
+&nbsp;&nbsp;&nbsp; "" for string parameters<br>
+&nbsp;&nbsp;&nbsp; -1 for numeric parameters<br>
+<br>
+Only one SplashImage/Text window is allowed at one time; so if you wish to cycle through multiple images/text, simply call SplashImageOn/SplashTextOn again with the new information.<br>
+<br>
+Even better is to use ControlSetText to update text without flicker...<br>
+If the text is center and multiline, the ControlSetText will not override the number of lines created by the SplashTextOn.<br>
+<br>
+Splash with opt=1 cannot be moved and cannot be activated  by click.<br>
+<br>
+Standard font names include:<br>
+&nbsp;&nbsp;&nbsp; Arial, Comic Sans MS, Courier New, Lucida Console, Microsoft Sans Serif, System, Tahoma, Times New Roman, and WingDings<br>
+See Appendix for a complete font list<br>
+<br>
+Use @LF to display several lines.<br>
+<br>
+
+<h2>Related</h2>
+<a href="SplashOff.htm">SplashOff</a>, <a href="SplashImageOn.htm">SplashImageOn</a>, <a href="ControlSetText.htm">ControlSetText</a>, <a href="ToolTip.htm">ToolTip</a>, <a href="MsgBox.htm">MsgBox</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\SplashTextOn.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S4">SplashTextOn</span><span class="S8">(</span><span class="S7">"Title"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Message goes here."</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S3">24</span><span class="S8">)</span>
+<span class="S4">Sleep</span><span class="S8">(</span><span class="S3">3000</span><span class="S8">)</span>
+<span class="S4">SplashOff</span><span class="S8">()</span>
+
+<span class="S1">; ; FLICKER</span>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sMessage</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span>
+<span class="S4">SplashTextOn</span><span class="S8">(</span><span class="S7">"TitleFoo"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sMessage</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">)</span>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S3">20</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sMessage</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$sMessage</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">SplashTextOn</span><span class="S8">(</span><span class="S7">"TitleFoo"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sMessage</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">100</span><span class="S8">)</span>
+<span class="S5">Next</span>
+
+<span class="S1">; ; SMOOTH</span>
+<span class="S9">$sMessage</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span>
+<span class="S4">SplashTextOn</span><span class="S8">(</span><span class="S7">"TitleFoo"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sMessage</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">)</span>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S3">20</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sMessage</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$sMessage</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">ControlSetText</span><span class="S8">(</span><span class="S7">"TitleFoo"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Static1"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sMessage</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">100</span><span class="S8">)</span>
+<span class="S5">Next</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

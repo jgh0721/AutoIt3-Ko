@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Method WinKill</title>
+  <meta charset="ISO-8859-1">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Method Reference</h1>
+<hr style="height:0px">
+<h1>WinKill</h1>
+<p class="funcdesc">Forces a window to close.<br></p>
+
+<p class="codeheader">
+WinKill "title" [, "text"]<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">title</td>
+    <td style="width:85%">The title of the window to close.</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td><b>Optional:</b> The text of the window to close.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+None.  (Always returns 1 regardless of success.)<br>
+
+<h2>Remarks</h2>
+The difference between this function and WinClose is that WinKill will forcibly terminate the window if it doesn't close quickly enough.  Consequently, a user might not have time to respond to dialogs prompting the user to save data.  Although WinKill can work on both minimized and hidden windows, some windows (notably explorer windows) can only be terminated using WinClose.<br>
+<br>
+
+<h2>Related</h2>
+<a href="WinActivate.htm">WinActivate</a>, <a href="WinClose.htm">WinClose</a>, <a href="WinSetState.htm">WinSetState</a>, <a href="ProcessClose.htm">ProcessClose</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+Set oAutoIt = WScript.CreateObject("AutoItX3.Control")
+oAutoIt.WinKill "Untitled - ", ""
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

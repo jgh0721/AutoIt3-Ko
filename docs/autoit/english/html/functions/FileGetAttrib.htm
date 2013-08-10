@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function FileGetAttrib</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>FileGetAttrib</h1>
+<p class="funcdesc">Returns a code string representing a file's attributes.<br></p>
+
+<p class="codeheader">
+FileGetAttrib ( "filename" )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">filename</td>
+    <td style="width:85%">The path to the file or directory to check.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Returns a code string representing a files attributes.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>Returns "" (empty string) and sets @error to 1.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+String returned could contain a combination of these letters "RASHNDOCT":<br>
+"R" = READONLY<br>
+"A" = ARCHIVE<br>
+"S" = SYSTEM<br>
+"H" = HIDDEN<br>
+"N" = NORMAL<br>
+"D" = DIRECTORY<br>
+"O" = OFFLINE<br>
+"C" = COMPRESSED (NTFS compression, not ZIP compression)<br>
+"T" = TEMPORARY<br>
+<br>
+
+<h2>Related</h2>
+<a href="FileGetTime.htm">FileGetTime</a>, <a href="FileSetAttrib.htm">FileSetAttrib</a>, <a href="FileExists.htm">FileExists</a>, <a href="FileGetSize.htm">FileGetSize</a>, <a href="FileSetTime.htm">FileSetTime</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\FileGetAttrib.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Create a constant variable in Local scope to store the file attributes of the current script.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$sAttribute</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileGetAttrib</span><span class="S8">(</span><span class="S6">@ScriptFullPath</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display the string returned by FileGetAttrib.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The attribute string: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sAttribute</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Display the string returned by AttributeToString</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The attribute string with easier to understand values: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; AttributeToString</span><span class="S8">(</span><span class="S9">$sAttribute</span><span class="S8">))</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+
+<span class="S5">Func</span><span class="S0"> AttributeToString</span><span class="S8">(</span><span class="S9">$sAttribute</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Create a 1d array of the file attribute letters by splitting the string at the comma (,).</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$aInput</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringSplit</span><span class="S8">(</span><span class="S7">"R,A,S,H,N,D,O,C,T"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">","</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Create a 1d array using the friendlier file attribute names by splitting the string at the comma (,).</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$aOutput</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringSplit</span><span class="S8">(</span><span class="S7">"Read-only /, Archive /, System /, Hidden /"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">", Normal /, Directory /, Offline /, Compressed /, Temporary /"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">","</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Loop through the attribute letters array to replace with the friendlier value e.g. A becomes Archive or S becomes System.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S9">$aInput</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sAttribute</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringReplace</span><span class="S8">(</span><span class="S9">$sAttribute</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$aInput</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$aOutput</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">],</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$STR_CASESENSE</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Remove the single space and trailing forward slash.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sAttribute</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringTrimRight</span><span class="S8">(</span><span class="S9">$sAttribute</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Return the attribute string.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$sAttribute</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;AttributeToString</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

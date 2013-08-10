@@ -1,0 +1,34 @@
+###User Defined Function###
+_StringReverse
+
+###Description###
+Reverses the contents of the specified string.
+
+###Syntax###
+#include <String.au3>
+_StringReverse ( $sString )
+
+
+###Parameters###
+@@ParamTable@@
+$sString
+	String to reverse
+@@End@@
+
+###ReturnValue###
+@@ReturnTable@@
+Success:	Returns reversed string
+Failure:	Returns an empty string and sets @error
+@error:	1 = The string is zero in length
+@@End@@
+
+
+###Remarks###
+None.
+
+
+###Related###
+
+
+###Example###
+@@IncludeExample@@

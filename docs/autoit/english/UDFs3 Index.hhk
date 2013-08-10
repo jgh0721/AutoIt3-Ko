@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="User Defined Functions Reference">
+<param name="Local" value="html\libfunctions.htm">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="User Defined Function Notes">
+<param name="Local" value="html\libfunction_notes.htm">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="UDFs Constants include files<">
+<param name="Local" value="html\libfunction_constants.htm">
+</OBJECT>
+</UL>
+</BODY></HTML>

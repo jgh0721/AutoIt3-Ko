@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Keyword For...In...Next</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Keyword Reference</h1>
+<hr style="height:0px">
+<h1>For...In...Next</h1>
+<p class="funcdesc">Enumerates elements in an Object collection or an Array<br></p>
+
+<p class="codeheader">
+<b>For</b> &lt;$Variable&gt; <b>In</b> &lt;expression&gt;<br>
+&nbsp;&nbsp;&nbsp; <i>statements</i><br>
+&nbsp;&nbsp;&nbsp; ...<br>
+<b>Next</b><br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">Variable</td>
+    <td style="width:85%">A variable to which an element is being assigned</td>
+  </tr>
+  <tr>
+   <td>expression</td>
+   <td>Must be an expression resulting in an Object, or an Array with at least one element</td>
+  </tr>
+</table>
+
+
+<h2>Remarks</h2>
+The Variable will be created automatically with a Local scope, even when MustDeclareVars is on.<br>
+If the expression is an Object collection with no elements, or an multi-dimensional array, the loop will be skipped and the Variable will contain an empty string.<br>
+If the expression is not an Object nor an Array, the script stops with an error, unless a COM Error handler had been configured.<br>
+AutoIt Arrays are read-only when using For...In.  While you can assign the variable inside the For...In loop a value, this change is not reflected in the array itself.  To modify the contents of an array during enumeration, use a For...To loop.<br>
+<br>
+For...In...Next statements may be nested.<br>
+<br>
+
+<h2>Related</h2>
+<a href="With.htm">With...EndWith</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\ForInNext.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Using an Array</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">4</span><span class="S8">]</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"a"</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1.3434</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">3</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"test"</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sString</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$vElement</span><span class="S0"> </span><span class="S5">In</span><span class="S0"> </span><span class="S9">$aArray</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sString</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$sString</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$vElement</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"For..IN Arraytest:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"Result is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sString</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Using an Object Collection</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$oShell</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"shell.application"</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$oShellWindows</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$oShell</span><span class="S8">.</span><span class="S14">windows</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S4">IsObj</span><span class="S8">(</span><span class="S9">$oShellWindows</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sString</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$Window</span><span class="S0"> </span><span class="S5">In</span><span class="S0"> </span><span class="S9">$oShellWindows</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sString</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$sString</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$Window</span><span class="S8">.</span><span class="S14">LocationName</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Next</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You have the following windows open:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sString</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span>
+
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You have no open shell windows."</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

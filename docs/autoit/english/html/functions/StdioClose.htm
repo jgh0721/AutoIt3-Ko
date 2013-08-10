@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function StdioClose</title>
+  <meta charset="ISO-8859-1">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1 class="small">Function Reference</h1>
+<hr style="height:0px">
+<h1>StdioClose</h1>
+<p class="funcdesc">Closes all resources associated with a process previously run with STDIO redirection.<br></p>
+
+<p class="codeheader">
+StdioClose ( process_id )<br>
+</p>
+
+<h2>Parameters</h2>
+<table>
+  <tr>
+    <td style="width:15%">process_id</td>
+    <td style="width:85%">The process ID of a child process, as returned by a previous call to Run.</td>
+  </tr>
+</table>
+
+
+<h2>Return Value</h2>
+<table class="noborder">
+  <tr>
+    <td style="width:10%" valign="top">Success:</td>
+    <td style="width:90%">Non-zero.</td>
+  </tr>
+  <tr>
+    <td valign="top">Failure:</td>
+    <td>0 if the process did not have STDIO redirection or was already closed.</td>
+  </tr>
+</table>
+
+<h2>Remarks</h2>
+This function closes all handles and releases all resources related to STDIO.  It will no longer be possible to read the STDIO data from the process.  Any pending data will be lost.<br>
+<br>
+
+<h2>Related</h2>
+<a href="StdoutRead.htm">StdoutRead</a>, <a href="StderrRead.htm">StderrRead</a>, <a href="StdinWrite.htm">StdinWrite</a>, <a href="Run.htm">Run</a>, <a href="RunAs.htm">RunAs</a>
+
+
+<h2 class="bottom">Example</h2>
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    function copyToClipboard(s){if (window.clipboardData && clipboardData.setData){clipboardData.setData("text", s + "\r\n");alert("Copied to clipboard");}}
+</script>
+<div class="codeSnippetContainer">
+    <div class="codeSnippetContainerTabs">
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+{
+document.write('<div class="codeSnippetContainerTab codeSnippetContainerTabSingle" dir="ltr">');
+document.write('<object id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"><param name="Command" value="ShortCut"><param name="Font" value="Verdana,10pt"><param name="Text" value="Text:Open this Script"><param name="Item1" value=",Examples\\HelpFile\\StdioClose.au3,"></object>');
+document.write('</div>');
+}
+</script>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+<script type="text/javascript">
+if ((navigator.appName=="Microsoft Internet Explorer") && (parseInt(navigator.appVersion)>=4)) // IE (4+) only
+    document.write('<a href="#" id="copy" onclick="copyToClipboard(document.getElementById(\'copytext0\').innerText)">Copy to clipboard</a>');
+</script>
+            </div>
+        </div>
+        <div id="copytext0" class="codeSnippetContainerCode" dir="ltr">
+<div style="color:Black;"><pre>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Array.au3&gt;</span><span class="S0"> </span><span class="S1">; Required for _ArrayDisplay only.</span>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span>
+
+<span class="S1">; Recursively display a list of files in a directory.</span>
+<span class="S0">Example</span><span class="S8">()</span>
+
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sFilePath</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S6">@ScriptDir</span><span class="S0"> </span><span class="S1">; Search the current script directory.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sFilter</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"*.*"</span><span class="S0"> </span><span class="S1">; Search for all files in the current directory. For a list of valid wildcards, search for 'Wildcards' in the Help file.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sOutput</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span><span class="S0"> </span><span class="S1">; Store the output of StdoutRead to a variable.</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; If the file path isn't a directory then return from the 'Example' function.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S4">StringInStr</span><span class="S8">(</span><span class="S4">FileGetAttrib</span><span class="S8">(</span><span class="S9">$sFilePath</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"D"</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S4">SetError</span><span class="S8">(</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Remove trailing backslashes and append a single trailing backslash.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sFilePath</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExpReplace</span><span class="S8">(</span><span class="S9">$sFilePath</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"[\\/]+\z"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\"</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S2">#cs</span>
+<span class="S2">&nbsp; &nbsp; &nbsp; &nbsp; Commandline parameters for DIR:</span>
+<span class="S2">&nbsp; &nbsp; &nbsp; &nbsp; /B - Simple output.</span>
+<span class="S2">&nbsp; &nbsp; &nbsp; &nbsp; /A-D - Search for all files, minus folders.</span>
+<span class="S2">&nbsp; &nbsp; &nbsp; &nbsp; /S - Search within subfolders.</span>
+<span class="S2">&nbsp; &nbsp; #ce</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iPID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Run</span><span class="S8">(</span><span class="S6">@ComSpec</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">' /C DIR "'</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sFilePath</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sFilter</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">'" /B /A-D /S'</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sFilePath</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_HIDE</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$STDOUT_CHILD</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Close the Stdio stream of the PID returned by Run. This will cause the message box to display due to not being able to read the stdout stream.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">StdioClose</span><span class="S8">(</span><span class="S9">$iPID</span><span class="S8">)</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sOutput</span><span class="S0"> </span><span class="S8">&amp;=</span><span class="S0"> </span><span class="S4">StdoutRead</span><span class="S8">(</span><span class="S9">$iPID</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; Read the Stdout stream of the PID returned by Run.</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S1">; Exit the loop if the process closes or StdoutRead returns an error.</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndIf</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span>
+
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; Use StringSplit to split the output of StdoutRead to an array. All carriage returns (@CRLF) are stripped and @CRLF (line feed) is used as the delimiter.</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringSplit</span><span class="S8">(</span><span class="S4">StringTrimRight</span><span class="S8">(</span><span class="S4">StringStripCR</span><span class="S8">(</span><span class="S9">$sOutput</span><span class="S8">),</span><span class="S0"> </span><span class="S4">StringLen</span><span class="S8">(</span><span class="S6">@CRLF</span><span class="S8">)),</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S9">$MB_SYSTEMMODAL</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"It appears there was an error trying to find all the files in the current script directory."</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; Display the results.</span>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S15">_ArrayDisplay</span><span class="S8">(</span><span class="S9">$aArray</span><span class="S8">)</span>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span>
+<span class="S0"></span></span>
+</pre></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>
